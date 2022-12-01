@@ -1,0 +1,13 @@
+---
+import Layout from "../layouts/Layout.astro"
+import GraficoPrueba from "../components/grafico";
+import readPlotsData from "../utils/readPlotsData";
+
+const data = await Astro.glob('../data/impo_usos.json')
+
+---
+
+
+<Layout title="Grafiquito">
+    <GraficoPrueba plotData={data[0]}  client:only/>
+</Layout>

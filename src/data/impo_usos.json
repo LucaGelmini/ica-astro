@@ -1,0 +1,68 @@
+{
+  "data": [
+    {
+      "alignmentgroup": "True",
+      "bingroup": "x",
+      "histfunc": "sum",
+      "hovertemplate": "Per\u00edodo=Octubre 2022*<br>Usos=%{x}<br>sum of Valor=%{y}<extra></extra>",
+      "legendgroup": "Octubre 2022*",
+      "marker": { "color": "#1F77B4", "pattern": { "shape": "" } },
+      "name": "Octubre 2022*",
+      "offsetgroup": "Octubre 2022*",
+      "orientation": "v",
+      "showlegend": true,
+      "x": ["BK", "BI", "CyL", "PyA", "BC", "VA", "Resto"],
+      "xaxis": "x",
+      "y": [996.0, 2334.0, 601.0, 1231.0, 676.0, 202.0, 33.0],
+      "yaxis": "y",
+      "type": "histogram"
+    },
+    {
+      "alignmentgroup": "True",
+      "bingroup": "x",
+      "histfunc": "sum",
+      "hovertemplate": "Per\u00edodo=Octubre 2021*<br>Usos=%{x}<br>sum of Valor=%{y}<extra></extra>",
+      "legendgroup": "Octubre 2021*",
+      "marker": { "color": "#FF7F0E", "pattern": { "shape": "" } },
+      "name": "Octubre 2021*",
+      "offsetgroup": "Octubre 2021*",
+      "orientation": "v",
+      "showlegend": true,
+      "x": ["BK", "BI", "CyL", "PyA", "BC", "VA", "Resto"],
+      "xaxis": "x",
+      "y": [869, 2227, 393, 991, 606, 104, 57],
+      "yaxis": "y",
+      "type": "histogram"
+    }
+  ],
+  "layout": {
+    "template": { "data": { "scatter": [{ "type": "scatter" }] } },
+    "xaxis": {
+      "anchor": "y",
+      "domain": [0.0, 1.0],
+      "title": { "text": "Usos" }
+    },
+    "yaxis": {
+      "anchor": "x",
+      "domain": [0.0, 1.0],
+      "title": { "text": "En millones de USD" },
+      "tickformat": ","
+    },
+    "legend": {
+      "title": { "text": "Per\u00edodo" },
+      "tracegroupgap": 0,
+      "yanchor": "top",
+      "orientation": "h",
+      "y": 1.07,
+      "xanchor": "left",
+      "x": 0.3
+    },
+    "margin": { "t": 60 },
+    "barmode": "group",
+    "font": { "family": "georgia" },
+    "title": {
+      "text": "Importaci\u00f3n por usos econ\u00f3micos. Octubre de 2022 y octubre de 2021"
+    },
+    "separators": ",."
+  }
+}
