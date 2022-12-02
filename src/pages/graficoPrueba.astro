@@ -1,10 +1,39 @@
 ---
 import Layout from "../layouts/Layout.astro";
 import GraficoPrueba from "../components/grafico";
+import Tabs from "../layouts/Tabs.astro";
+import Tab from "../components/tab.astro";
+import TabsContent from "../layouts/TabsContent.astro";
 
 const data = await Astro.glob("../data/impo_usos.json");
 ---
 
 <Layout title="Grafiquito">
-    <GraficoPrueba plotData={data[0]} client:only />
+    <section>
+        <Tabs id="testPlot">
+            <Tab contentRef="grafico1" defaultTab={true}>Gráfico de prueba</Tab>
+            <Tab contentRef="tabla1">Tabla de prueba</Tab>
+        </Tabs>
+
+        <TabsContent tabsId="testPlot">
+            <div id="grafico1">
+                <GraficoPrueba plotData={data[0]} client:only />
+            </div>
+            <div id="tabla1" class="hidden">Tablaaaa</div>
+        </TabsContent>
+
+        <p>Esto es un coso de prueba</p>
+    </section>
+    <section class="mt-10">
+        <Tabs id="otrasTabs">
+            <Tab contentRef="otraTab1" defaultTab={true}>otra tab</Tab>
+            <Tab contentRef="otraTab2">otra tab2</Tab>
+        </Tabs>
+
+        <TabsContent tabsId="otrasTabs">
+            <div id="otraTab1" class="bg-red-200 h-40 w-40 m-auto"></div>
+            <div id="otraTab2" class="bg-cyan-200 w-40 h-40 m-auto hidden">
+            </div>
+        </TabsContent>
+    </section>
 </Layout>
