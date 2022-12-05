@@ -2,7 +2,6 @@ from modules.expo import df_grafico1_tabla, plot_expo_rubros,cuadro5,cuadro6
 from modules.impo import df_grafico2_tabla, plot_impo_usos, cuadro7, cuadro8
 from modules.index import r2_df, c1, c2, balanza, plot_agregado
 import plotly.io as io
-import json
 
 # Exportar a json
 #Grafos
@@ -11,8 +10,6 @@ io.write_json(plot_impo_usos, file = "./src/data/plot_impo_usos.json")
 io.write_json(plot_agregado, file = "./src/data/plot_agregado.json")
 
 #Tablas
-
-
 df_grafico1_tabla.to_json("./src/data/df_grafico1_tabla.json",force_ascii=False)
 cuadro5.to_json("./src/data/cuadro5.json",force_ascii=False)
 cuadro6.to_json("./src/data/cuadro6.json",force_ascii=False)
