@@ -19,18 +19,18 @@ np.array(['','2022e','2021*','Variación porcentual igual período año anterior
           '2022*',"2021*",'Variación porcentual igual período año anterior','Variación porcentual acumulado igual período año anterior',
           "2022*","2021*"])] 
 c1 = pd.read_excel("./src/wrangling py/data/ICA_esqueleto.xlsx",sheet_name="c 1", skiprows=12)
-c1.columns = header
+c1.columns = header # type:ignore
 c1.head()
 
 # %%
 c2 = pd.read_excel("./src/wrangling py/data/ICA_esqueleto.xlsx",sheet_name="c 2",skiprows=5)
-c2.columns = [np.array(["Octubre 2022","Octubre 2022","Octubre 2022","Octubre 2022"]),
+c2.columns = [np.array(["Octubre 2022","Octubre 2022","Octubre 2022","Octubre 2022"]), # type:ignore
               np.array(["","Valor","Precio","Cantidad"])]
 c2
 
 # %%
 balanza = pd.read_csv("./src/wrangling py/data/SerieHistorica.csv",sep=";",decimal=",")
-balanza.index = pd.to_datetime((balanza.Mes.astype(str) + "-"+balanza["Año"].astype(str)))
+balanza.index = pd.to_datetime((balanza.Mes.astype(str) + "-"+balanza["Año"].astype(str)))# type:ignore
 balanza = balanza["2011":]
 balanza
 

@@ -19,4 +19,10 @@ pnpm-debug.log*
 # macOS-specific files
 .DS_Store
 
+# python
+__pycache__
+src/"wrangling py"/data*
+venv
 
+data/cuadros/*
+data/plots/*
