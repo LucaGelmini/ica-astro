@@ -24,7 +24,9 @@ plot_impo_usos.update_layout(separators=",.",font_family='georgia', title_text =
        y=1.07,
        xanchor="left",
        x=0.3))
-plot_impo_usos.update_traces(hovertemplate='Período: %{hover_data[0]} <br>Uso: %{x} <br>Dólares: $%{y}')
+
+plot_impo_usos.data[0].hovertemplate = 'Periodo: Octubre 2021*<br>Uso: %{x}<br>Dolares: $%{y}<extra></extra>'
+plot_impo_usos.data[1].hovertemplate = 'Periodo: Octubre 2022*<br>Uso: %{x}<br>Dolares: $%{y}<extra></extra>'
 
 
 # io.write_json(plot_impo_usos, file = "./src/wrangling py/data/impo_usos.json")

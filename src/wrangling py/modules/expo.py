@@ -17,8 +17,8 @@ plot_expo_rubros.update_layout(separators=",.",font_family='georgia', title_text
        y=1.07,
        xanchor="left", 
        x=0.3))
-plot_expo_rubros
-# io.write_json(plot_expo_rubros, file = "../src/wrangling py/data/expo_rubros.json")
+plot_expo_rubros.data[0].hovertemplate = 'Periodo: Octubre 2021*<br>Rubro: %{x}<br>Dolares: $%{y}<extra></extra>'
+plot_expo_rubros.data[1].hovertemplate = 'Periodo: Octubre 2022e<br>Rubro: %{x}<br>Dolares: $%{y}<extra></extra>'
 
 # %%
 columnas = ["Rubros","Octubre 2022e", "Octubre 2021*", "Octubre Variación porcentual", "Diez meses 2022e", "Diez meses 2021*", "Diez meses Variación porcentual"]
