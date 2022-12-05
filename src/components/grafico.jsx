@@ -1,4 +1,3 @@
-import fs from "fs";
 import Plot from "react-plotly.js";
 
 const GraficoPrueba = ({ plotData }) => {

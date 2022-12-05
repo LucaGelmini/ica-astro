@@ -5,6 +5,8 @@ import Tabs from "../layouts/Tabs.astro";
 import TabsContent from "../layouts/TabsContent.astro";
 
 const tabsId = "tabs";
+
+console.log(Astro.params);
 ---
 
 <Layout title="Síntesis">
@@ -19,6 +21,6 @@ const tabsId = "tabs";
             <div id="uno" class="p-4">{tabsId}</div>
             <div id="dos" class="hidden p-4">Dos</div>
         </TabsContent>
-        <div id={`${tabsId}-contents`}></div>
+        
     </main>
 </Layout>
