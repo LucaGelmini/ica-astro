@@ -30,7 +30,9 @@ plot_impo_usos.update_layout(separators=",.", font_family='georgia', title_text=
                                  x=0.3))
 
 # type:ignore
+# type:ignore
 plot_impo_usos.data[0].hovertemplate = 'Periodo: Octubre 2021*<br>Uso: %{x}<br>Dolares: $%{y}<extra></extra>'
+# type:ignore
 # type:ignore
 plot_impo_usos.data[1].hovertemplate = 'Periodo: Octubre 2022*<br>Uso: %{x}<br>Dolares: $%{y}<extra></extra>'
 

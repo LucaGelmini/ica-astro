@@ -1,0 +1,22 @@
+---
+import Hamburguer from "./Hamburguer.astro";
+import Navigation from "./Navigation.astro";
+
+const  pages:object = {
+    Síntesis: "/",
+    Exportaciones: "/expo",
+    Importaciones: "/impo"
+};
+
+---
+<header>
+    <nav class="px-4 h-12  bg-gray-100 border border-gray-200 flex items-center justify-between">
+        <a href="/" class="h-full flex items-center"><h1 class=" font-semibold text-lg text-gray-500">
+            Intercambio comercial argentino
+        </h1></a>
+        <Hamburguer/>
+        <Navigation pages={pages}/>
+
+
+    </nav>
+</header>

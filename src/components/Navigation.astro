@@ -1,0 +1,26 @@
+---
+export interface Props {
+    pages: any;
+};
+
+const {pages} = Astro.props;
+---
+
+<div class="hidden lg:flex justify-center h-full" id="nav-container">
+    {Object.keys(pages)
+        .map(page=><a href={pages[page]} class="h-full px-2 flex items-center hover:bg-gray-200">{page}</a>)}
+</div>
+
+
+<script is:inline>
+
+    const anchors = document.querySelectorAll('#nav-container a');
+    anchors.forEach(anchor=>{
+        const href = anchor.attributes.href.value;
+        if (href === window.location.pathname){
+            anchor.classList.add("hidden");
+        }else{
+            anchor.classList.remove("hidden")
+        }
+    })
+</script>

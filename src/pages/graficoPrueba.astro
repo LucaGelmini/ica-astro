@@ -6,7 +6,7 @@ import Tab from "../components/tab.astro";
 import TabsContent from "../layouts/TabsContent.astro";
 import Main from "../layouts/Main.astro";
 
-const data = await Astro.glob("../data/plot_agregado.json");
+import data from "../data/plots/plot_agregado.json"
 ---
 
 <Layout title="Grafiquito">
@@ -20,7 +20,7 @@ const data = await Astro.glob("../data/plot_agregado.json");
     
             <TabsContent tabsId="testPlot">
                 <div id="grafico1">
-                    <GraficoPrueba plotData={data[0]} client:only />
+                    <GraficoPrueba plotData={data} client:only />
                 </div>
                 <div id="tabla1" class="hidden">Tablaaaa</div>
             </TabsContent>
