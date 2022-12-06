@@ -1,4 +1,4 @@
-En agosto de 2022, las exportaciones disminuyeron 6,9% respecto a igual mes del aí±o anterior. Todos los rubros registraron subas, salvo PP que tuvo una baja de 27,4% (-759 millones de Dólares). CyE ascendió 6,8% (42 millones de Dólares); MOA, 5,2% (142 millones de Dólares); y MOI, 0,7% (14 millones de Dólares).
+En agosto de 2022, las exportaciones disminuyeron 6,9% respecto a igual mes del año anterior. Todos los rubros registraron subas, salvo PP que tuvo una baja de 27,4% (-759 millones de Dólares). CyE ascendió 6,8% (42 millones de Dólares); MOA, 5,2% (142 millones de Dólares); y MOI, 0,7% (14 millones de Dólares).
 
 El rubro PP descendió 27,4%, debido a una baja de 32,2% de las cantidades y un incremento de 7,1% de los precios en la comparación interanual. La caí­da se debió principalmente a menores ventas de semillas y frutos oleaginosos (-562 millones de Dólares) y cereales (-81 millones de Dólares).
 
