@@ -18,7 +18,6 @@ const {pages} = Astro.props;
     anchors.forEach(anchor=>{
         const href = anchor.attributes.href.value;
         if (href === window.location.pathname){
-            console.log(anchor)
             anchor.classList.add("hidden");
         }else{
             anchor.classList.remove("hidden")
