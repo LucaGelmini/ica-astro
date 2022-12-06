@@ -21,8 +21,8 @@ pnpm-debug.log*
 
 # python
 __pycache__
-src/"wrangling py"/data*
+src/"wrangling py"/data/*
 venv
 
-data/cuadros/*
-data/plots/*
+src/data/cuadros/*
+src/data/plots/*
