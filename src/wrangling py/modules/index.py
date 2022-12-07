@@ -40,7 +40,7 @@ plot_agregado.add_trace(
         x = new_date,
         y = balanza.Exportaciones/1000000,
         name = "Exportaciones",
-        hovertemplate="Exportaciones: $%{y:,.0f}"
+        hovertemplate="$%{y:,.0f}"
     ))
     
 plot_agregado.add_trace(
@@ -48,7 +48,7 @@ plot_agregado.add_trace(
         x = new_date,
         y = balanza.Importaciones/1000000,
         name = "Importaciones",
-        hovertemplate="Importaciones: $%{y:,.0f}"
+        hovertemplate="$%{y:,.0f}"
     )    
 )
 plot_agregado.add_trace(
@@ -56,10 +56,10 @@ plot_agregado.add_trace(
         x = new_date,
         y = balanza['Saldo comercial']/1000000,
         name = "Saldo",
-        hovertemplate="Saldo: $%{y:,.0f}"
+        hovertemplate="$%{y:,.0f}"
     )    
 )
-plot_agregado.update_layout(template = "none",separators=",.", title_text = "Exportaciones, importaciones y saldo comercial <BR><sup> En millones de USD",font_family="georgia")
+plot_agregado.update_layout(template = "none",separators=",.", font_family="georgia")
 plot_agregado.update_yaxes(tickformat = ",",
     dtick=1000)
 plot_agregado.update_xaxes(rangeslider=dict(
