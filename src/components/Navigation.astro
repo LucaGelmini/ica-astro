@@ -1,6 +1,6 @@
 ---
 export interface Props {
-    pages: any;
+    pages: object;
 };
 
 const {pages} = Astro.props;
@@ -18,9 +18,9 @@ const {pages} = Astro.props;
     anchors.forEach(anchor=>{
         const href = anchor.attributes.href.value;
         if (href === window.location.pathname){
-            anchor.classList.add("hidden");
+            anchor.classList.add("bg-gray-300");
         }else{
-            anchor.classList.remove("hidden")
+            anchor.classList.remove("bg-gray-300")
         }
     })
 </script>

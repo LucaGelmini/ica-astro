@@ -7,11 +7,12 @@ import TabsContent from "../layouts/TabsContent.astro";
 import Main from "../layouts/Main.astro";
 
 import data from "../data/plots/plot_agregado.json"
+import Collapsible from "../layouts/Collapsible.astro";
+
+import {Content as Texto1} from "../data/textos/index_1.md"
 ---
 
 <Layout title="Intercambio comercial Argentino">
-    <Main>
-
         <section>
             <Tabs id="testPlot">
                 <Tab contentRef="grafico1" defaultTab={true}>Gráfico de prueba</Tab>
@@ -25,7 +26,10 @@ import data from "../data/plots/plot_agregado.json"
                 <div id="tabla1" class="hidden">Tablaaaa</div>
             </TabsContent>
     
-            <p>Esto es un coso de prueba</p>
+            <Collapsible sumaryText="Probando">
+                <Texto1 class=" text-justify"/>
+            </Collapsible>
+
         </section>
         <section class="mt-10">
             <Tabs id="otrasTabs">
@@ -39,6 +43,4 @@ import data from "../data/plots/plot_agregado.json"
                 </div>
             </TabsContent>
         </section>
-
-    </Main>
 </Layout>
