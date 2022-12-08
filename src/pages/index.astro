@@ -1,28 +1,35 @@
 ---
 import Layout from "../layouts/Layout.astro";
 import GraficoPrueba from "../components/grafico";
+import Tabla from "../components/Table/Table"
+import CuadroR2 from "../components/cuadros/CuadroR2"
 import Tabs from "../layouts/Tabs.astro";
 import Tab from "../components/tab.astro";
 import TabsContent from "../layouts/TabsContent.astro";
 
 import data from "../data/plots/plot_agregado.json"
+import r2Data from "../data/cuadros/r2_df.json"
 import Collapsible from "../layouts/Collapsible.astro";
 
 import {Content as Texto1} from "../data/textos/index_1.md"
+import SuperTable from "../components/Table/SuperTable";
 ---
 
 <Layout title="Intercambio comercial Argentino">
         <section>
             <Tabs id="testPlot">
                 <Tab contentRef="grafico1" defaultTab={true}>Gráfico de prueba</Tab>
-                <Tab contentRef="tabla1">Tabla de prueba</Tab>
+                <Tab contentRef="tabla1"> Cuadro </Tab>
             </Tabs>
     
             <TabsContent tabsId="testPlot">
                 <div id="grafico1">
                     <GraficoPrueba plotData={data} client:only />
                 </div>
-                <div id="tabla1" class="hidden">Tablaaaa</div>
+                <div id="tabla1" class="hidden overflow-x-scroll">
+                    <CuadroR2 tableData = {r2Data} client:only />
+                    <!-- <SuperTable client:only /> -->
+                </div>
             </TabsContent>
     
             <Collapsible sumaryText="Probando">
