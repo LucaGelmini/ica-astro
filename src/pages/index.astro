@@ -9,6 +9,10 @@ import TabsContent from "../layouts/TabsContent.astro";
 
 import data from "../data/plots/plot_agregado.json"
 import r2Data from "../data/cuadros/r2_df.json"
+import tablaDesestacionalizada from "../data/cuadros/tabla desestacionalizada.json"
+
+
+
 import Collapsible from "../layouts/Collapsible.astro";
 
 import {Content as Texto1} from "../data/textos/index_1.md"
@@ -46,7 +50,9 @@ import StaticTable from "../components/StaticTable.astro";
             </Tabs>
     
             <TabsContent tabsId="otrasTabs">
-                <div id="otraTab1" class="bg-red-200 h-40 w-40 m-auto"></div>
+                <div id="otraTab1">
+                    <StaticTable tableData={tablaDesestacionalizada} tableId="tablaDes" hideIndex={false}/>
+                </div>
                 <div id="otraTab2" class="bg-cyan-200 w-40 h-40 m-auto hidden">
                 </div>
             </TabsContent>
