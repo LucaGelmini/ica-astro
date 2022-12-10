@@ -13,6 +13,7 @@ import Collapsible from "../layouts/Collapsible.astro";
 
 import {Content as Texto1} from "../data/textos/index_1.md"
 import SuperTable from "../components/Table/SuperTable";
+import StaticTable from "../components/StaticTable.astro";
 ---
 
 <Layout title="Intercambio comercial Argentino">
@@ -26,8 +27,9 @@ import SuperTable from "../components/Table/SuperTable";
                 <div id="grafico1">
                     <GraficoPrueba plotData={data} client:only />
                 </div>
-                <div id="tabla1" class="hidden overflow-x-scroll">
-                    <CuadroR2 tableData = {r2Data} client:only />
+                <div id="tabla1" class="hidden">
+                    <StaticTable tableData={r2Data} tableId="R2" innerTitles={[0,5]} hideIndex={true}/>
+                    <!-- <CuadroR2 tableData = {r2Data} client:only /> -->
                     <!-- <SuperTable client:only /> -->
                 </div>
             </TabsContent>
