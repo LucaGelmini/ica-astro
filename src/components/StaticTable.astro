@@ -29,7 +29,6 @@ const rouondAllNumercCol = (precision)=>{
     data.map(row=>{
         for(let col in row){
             if(fields.filter(f=>f.name===col)[0].type==="number") {
-                console.log(row[col])
                 row[col] = Math.round(row[col]).toFixed(precision);
             }
         }
