@@ -10,10 +10,11 @@ export interface Props{
     tableId: string,
     hideIndex?: boolean,
     innerTitles?: Array<number>|null,
-    roundNumeric?: number
+    roundNumeric?: number,
+    rowEmphasis?:Array<number>
 }
 let {tableData:{schema:{fields}, data}} = Astro.props;
-const {tableId, hideIndex= true, innerTitles=null, roundNumeric=1} = Astro.props;
+const {tableId, hideIndex= true, innerTitles=null, roundNumeric=1, rowEmphasis=[]} = Astro.props;
 
 
 
@@ -58,7 +59,7 @@ const innerTitlesLogic = (index: number) => {
 
 
 
-<table id= {tableId} class="mt-2">
+<table id= {tableId} class="w-full">
     <thead>
         <tr class="text-center border-b-2 border-black ">
             {
@@ -75,7 +76,7 @@ const innerTitlesLogic = (index: number) => {
                     {innerTitles && innerTitles.includes(i)?
                     innerTitlesLogic(colNumber)?<th colspan={`${Object.values(row).length}`}>{cell}</th>:null
                     :
-                    <td>{cell}</td>}
+                    <td class={rowEmphasis.includes(i)?'font-semibold':''}>{cell}</td>}
                     </>
                 ))}
             </tr>

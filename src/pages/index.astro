@@ -20,8 +20,7 @@ import SuperTable from "../components/Table/SuperTable";
 import StaticTable from "../components/StaticTable.astro";
 ---
 
-<Layout title="Intercambio comercial Argentino">
-    <h2>Síntesis</h2>
+<Layout title="Intercambio comercial Argentino" mainHeader="Síntesis">
         <section>
             <Tabs id="tabsSaldo">
                 <Tab contentRef="graficoSaldo" defaultTab={true}>Exportaciones, importaciones y saldo comercial</Tab>
@@ -33,7 +32,7 @@ import StaticTable from "../components/StaticTable.astro";
                     <GraficoPrueba plotData={data} client:only />
                 </div>
                 <div id="tabla1" class="hidden w-full overflow-x-auto">
-                    <StaticTable tableData={r2Data} tableId="R2" innerTitles={[0,5]} hideIndex={true} roundNumeric={1}/>
+                    <StaticTable tableData={r2Data} tableId="R2" innerTitles={[0,5]} hideIndex={true} roundNumeric={1} rowEmphasis={[1]}/>
                     <!-- <CuadroR2 tableData = {r2Data} client:only /> -->
                     <!-- <SuperTable client:only /> -->
                 </div>
