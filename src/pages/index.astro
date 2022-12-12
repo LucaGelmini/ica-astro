@@ -21,17 +21,18 @@ import StaticTable from "../components/StaticTable.astro";
 ---
 
 <Layout title="Intercambio comercial Argentino">
+    <h2>Síntesis</h2>
         <section>
-            <Tabs id="testPlot">
-                <Tab contentRef="grafico1" defaultTab={true}>Gráfico de prueba</Tab>
+            <Tabs id="tabsSaldo">
+                <Tab contentRef="graficoSaldo" defaultTab={true}>Exportaciones, importaciones y saldo comercial</Tab>
                 <Tab contentRef="tabla1"> Cuadro </Tab>
             </Tabs>
     
-            <TabsContent tabsId="testPlot">
-                <div id="grafico1">
+            <TabsContent tabsId="tabsSaldo">
+                <div id="graficoSaldo" class="w-full">
                     <GraficoPrueba plotData={data} client:only />
                 </div>
-                <div id="tabla1" class="hidden">
+                <div id="tabla1" class="hidden w-full overflow-x-auto">
                     <StaticTable tableData={r2Data} tableId="R2" innerTitles={[0,5]} hideIndex={true} roundNumeric={1}/>
                     <!-- <CuadroR2 tableData = {r2Data} client:only /> -->
                     <!-- <SuperTable client:only /> -->
@@ -50,7 +51,7 @@ import StaticTable from "../components/StaticTable.astro";
             </Tabs>
     
             <TabsContent tabsId="otrasTabs">
-                <div id="otraTab1">
+                <div id="otraTab1" class=" overflow-x-auto">
                     <StaticTable tableData={tablaDesestacionalizada} tableId="tablaDes" hideIndex={false} roundNumeric={1}/>
                 </div>
                 <div id="otraTab2" class="bg-cyan-200 w-40 h-40 m-auto hidden">

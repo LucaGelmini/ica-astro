@@ -7,8 +7,8 @@ const { tabsId } = Astro.props;
 ---
 
 <tab-id-data data-id={tabsId}></tab-id-data>
-<div id={`${tabsId}-contents`}>
-    <slot />
+<div id={`${tabsId}-contents`} class="flex justify-center">
+    <slot/>
 </div>
 
 <script>
