@@ -11,7 +11,7 @@ io.write_json(plot_impo_usos, file="./src/data/plots/plot_impo_usos.json")
 io.write_json(plot_agregado, file="./src/data/plots/plot_agregado.json")
 io.write_json(plot_desestacionalizado(df_plot_desest_expo),
               file="./src/data/plots/plot_desestacionalizado_expo.json")
-io.write_json(plot_desestacionalizado(df_plot_desest_expo),
+io.write_json(plot_desestacionalizado(df_plot_desest_impo),
               file="./src/data/plots/plot_desestacionalizado_impo.json")
 # Tablas
 df_grafico1_tabla.to_json(
