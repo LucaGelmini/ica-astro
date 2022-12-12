@@ -32,7 +32,7 @@ import StaticTable from "../components/StaticTable.astro";
                     <GraficoPrueba plotData={data} client:only />
                 </div>
                 <div id="tabla1" class="hidden">
-                    <StaticTable tableData={r2Data} tableId="R2" innerTitles={[0,5]} hideIndex={true}/>
+                    <StaticTable tableData={r2Data} tableId="R2" innerTitles={[0,5]} hideIndex={true} roundNumeric={1}/>
                     <!-- <CuadroR2 tableData = {r2Data} client:only /> -->
                     <!-- <SuperTable client:only /> -->
                 </div>
