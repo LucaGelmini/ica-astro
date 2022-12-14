@@ -6,12 +6,8 @@ export interface Props{
 const {sumaryText} = Astro.props;
 
 ---
-<details class="m-5 p-2 shadow-md bg-gray-100">
+<details class="m-5 p-2 shadow-md bg-gray-100 [&>p]:text-justify [&>p]:mb-3">
     <summary  class="cursor-pointer text-xl">{sumaryText}</summary>
     <slot />
 </details>
 
-<script is:inline>
-    const paragraphs = document.querySelectorAll('details p');
-    paragraphs.forEach(p=>p.classList.add('text-justify'));
-</script>

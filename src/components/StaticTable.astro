@@ -1,4 +1,5 @@
 ---
+import DownloadCSVButton from './downloadCSV/DownloadCSVButton.astro'
 
 export interface Props{
     tableData: {
@@ -58,8 +59,8 @@ const innerTitlesLogic = (index: number) => {
 
 
 
-
 <table id= {tableId} class="w-full">
+    <DownloadCSVButton  />
     <thead>
         <tr class="text-center border-b-2 border-black ">
             {
