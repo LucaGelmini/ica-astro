@@ -1,6 +1,6 @@
 from modules.expo import df_grafico1_tabla, plot_expo_rubros, cuadro5, cuadro6
 from modules.impo import df_grafico2_tabla, plot_impo_usos, cuadro7, cuadro8
-from modules.index import r2_df, c1, c2, balanza, plot_agregado
+from modules.index import r2_df, c1, c2_expo, c2_impo, balanza, plot_agregado
 from modules.desestacional import plot_desestacionalizado, desest_tabla_expo, desest_tabla_impo, df_plot_desest_expo, df_plot_desest_impo
 import plotly.io as io
 
@@ -40,7 +40,10 @@ cuadro8.to_json(
 r2_df.to_json("./src/data/cuadros/r2_df.json",
               force_ascii=False, orient='table')
 
-c2.to_json("./src/data/cuadros/c2.json", force_ascii=False, orient='table')
+c2_expo.to_json("./src/data/cuadros/c2_expo.json",
+                force_ascii=False, orient='table')
+c2_impo.to_json("./src/data/cuadros/c2_impo.json",
+                force_ascii=False, orient='table')
 
 balanza.to_json("./src/data/cuadros/balanza.json",
                 force_ascii=False, orient='table')

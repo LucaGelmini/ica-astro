@@ -56,13 +56,15 @@ import StaticTable from "../components/StaticTable.astro";
             
         </section>
         <section class="mt-10">
-            <h3 class="text-3xl font-semibold my-4">Índices de valores, precios y cantidades y efecto de los términos del intercambio de octubre de 2022</h3>
+            <h3 class="text-3xl font-semibold my-4">
+                Índices de valores, precios y cantidades y efecto de los términos del intercambio de octubre de 2022
+            </h3>
             <Collapsible sumaryText="Análisis">
                 <Texto2 />
             </Collapsible>
             <Tabs id="otrasTabs">
-                <Tab contentRef="otraTab1" defaultTab={true}>otra tab</Tab>
-                <Tab contentRef="otraTab2">otra tab2</Tab>
+                <Tab contentRef="otraTab1" defaultTab={true}>Exportaciones</Tab>
+                <Tab contentRef="otraTab2">Importaciones</Tab>
             </Tabs>
     
             <TabsContent tabsId="otrasTabs">
