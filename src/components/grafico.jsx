@@ -1,22 +1,25 @@
 import Plot from "react-plotly.js";
 import { useLayoutEffect, useRef, useState } from "react";
+import { useInView } from "react-intersection-observer";
 
 const GraficoPrueba = ({ plotData }) => {
-    const ref = useRef(null);
-
     const [width, setWidth] = useState(0);
     const [height, setHeight] = useState(0);
 
+    const { ref, inView, entry } = useInView({ threshold: 0 });
+
     useLayoutEffect(() => {
-        setWidth(ref.current.offsetWidth);
-        setHeight(ref.current.offsetHeight);
-    }, []);
+        if (inView) {
+            setWidth(entry.target.offsetWidth);
+            setHeight(entry.target.offsetHeight);
+        }
+    }, [inView]);
 
     return (
         <div ref={ref} className={"w-full h-[500px]"}>
             <Plot
                 data={plotData.data}
-                layout={{ ...plotData.layout, width, height }}
+                layout={{ width, height, ...plotData.layout }}
                 config={{
                     modeBarButtonsToRemove: [
                         "pan2d",

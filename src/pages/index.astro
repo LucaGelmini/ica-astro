@@ -1,6 +1,6 @@
 ---
 import Layout from "../layouts/Layout.astro";
-import GraficoPrueba from "../components/grafico";
+import Grafico from "../components/grafico";
 import Tabla from "../components/Table/Table"
 import CuadroR2 from "../components/cuadros/CuadroR2"
 import Tabs from "../layouts/Tabs.astro";
@@ -8,42 +8,58 @@ import Tab from "../components/tab.astro";
 import TabsContent from "../layouts/TabsContent.astro";
 
 import data from "../data/plots/plot_agregado.json"
+import dataDesestExpo from "../data/plots/plot_desestacionalizado_expo.json"
+import dataDesestImpo from "../data/plots/plot_desestacionalizado_impo.json"
 import r2Data from "../data/cuadros/r2_df.json"
 import tablaDesestacionalizada from "../data/cuadros/tabla desestacionalizada.json"
+
 
 
 
 import Collapsible from "../layouts/Collapsible.astro";
 
 import {Content as Texto1} from "../data/textos/index_1.md"
+import {Content as Texto2} from "../data/textos/index_2.md"
 import SuperTable from "../components/Table/SuperTable";
 import StaticTable from "../components/StaticTable.astro";
 ---
 
 <Layout title="Intercambio comercial Argentino" mainHeader="Síntesis">
         <section>
+            <Collapsible sumaryText="Síntesis de los resultados">
+                <Texto1 class=" text-justify"/>
+            </Collapsible>
             <Tabs id="tabsSaldo">
                 <Tab contentRef="graficoSaldo" defaultTab={true}>Exportaciones, importaciones y saldo comercial</Tab>
-                <Tab contentRef="tabla1"> Cuadro </Tab>
+                <Tab contentRef="tabla1"> Principales indicadores </Tab>
+                <Tab contentRef="desestExpo">Serie desestacionalizada de exportaciones</Tab>
+                <Tab contentRef="desestImpo">Serie desestacionalizada de importaciones</Tab>
             </Tabs>
     
             <TabsContent tabsId="tabsSaldo">
                 <div id="graficoSaldo" class="w-full">
-                    <GraficoPrueba plotData={data} client:only />
+                    <Grafico plotData={data} client:only />
                 </div>
                 <div id="tabla1" class="hidden w-full overflow-x-auto">
                     <StaticTable tableData={r2Data} tableId="R2" innerTitles={[0,5]} hideIndex={true} roundNumeric={1} rowEmphasis={[1]}/>
                     <!-- <CuadroR2 tableData = {r2Data} client:only /> -->
                     <!-- <SuperTable client:only /> -->
                 </div>
+                <div id="desestExpo" class="w-full hidden">
+                    <Grafico plotData={dataDesestExpo} client:only />
+                </div>
+                <div id="desestImpo" class="w-full hidden">
+                    <Grafico plotData={dataDesestImpo} client:only />
+                </div>
             </TabsContent>
     
-            <Collapsible sumaryText="Probando">
-                <Texto1 class=" text-justify"/>
-            </Collapsible>
-
+            
         </section>
         <section class="mt-10">
+            <h3 class="text-xl font-semibold my-4">Índices de valores, precios y cantidades y efecto de los términos del intercambio de octubre de 2022</h3>
+            <Collapsible sumaryText="Análisis">
+                <Texto2 class=" text-justify"/>
+            </Collapsible>
             <Tabs id="otrasTabs">
                 <Tab contentRef="otraTab1" defaultTab={true}>otra tab</Tab>
                 <Tab contentRef="otraTab2">otra tab2</Tab>
