@@ -19,14 +19,23 @@ const GraficoPrueba = ({ plotData }) => {
         <div ref={ref} className={"w-full h-[500px]"}>
             <Plot
                 data={plotData.data}
-                layout={{ width, height, ...plotData.layout }}
+                layout={{
+                    width,
+                    height,
+                    margin: { l: 50, r: 0, t: 0, b: 10 },
+                    ...plotData.layout,
+                }}
                 config={{
                     modeBarButtonsToRemove: [
-                        "pan2d",
+                        // "pan2d",
                         "select2d",
                         "lasso2d",
-                        "resetScale2d",
+                        "autoScale2d",
+                        // "resetScale2d",
+                        //"zoom2d",
                         "zoomOut2d",
+                        "zoomIn2d",
+                        "toImage",
                     ],
                     displaylogo: false,
                     responsive: true,
