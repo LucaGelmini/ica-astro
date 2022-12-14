@@ -6,6 +6,6 @@ export interface Props {
 const { id } = Astro.props;
 ---
 
-<ul id={id} class="inline-flex pt-2 px-1 w-full border-b items-stretch">
+<ul id={id} class="overflow-x-scroll inline-flex pt-2 px-1 w-full border-b items-stretch md:overflow-visible">
     <slot />
 </ul>
