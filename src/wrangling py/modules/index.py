@@ -37,7 +37,7 @@ c2.columns = c2_columnas
 c2_expo = c2[:5]
 c2_impo = c2[6:]
 for (c, tipo) in [(c2_expo, 'Rubros'), (c2_impo, 'Usos')]:
-    c.iloc[[0, 0]] = 'Total'
+    c.iloc[0, 0] = 'Total'
     c.columns = [f'<-{tipo}>', *c.columns[1:]]
 
 # %%
