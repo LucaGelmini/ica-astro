@@ -8,9 +8,9 @@ const { defaultTab = false, contentRef } = Astro.props;
 
 <li
     id={defaultTab ? "default-tab-container" : null}
-    class="font-semibold rounded-t -mb-px cursor-pointer h-fit w-fit flex flex-wrap hover:bg-gray-200"
+    class="font-semibold rounded-t -mb-px cursor-pointer  flex flex-wrap hover:bg-gray-200"
 >
-    <a id={defaultTab ? "default-tab" : null} href={`#${contentRef}`} class="py-2 px-5 ">
-        <slot />
+    <a id={defaultTab ? "default-tab" : null} href={`#${contentRef}`} class="py-2 px-5 h-fit w-fit">
+        <slot/>
     </a>
 </li>

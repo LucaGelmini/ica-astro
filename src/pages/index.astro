@@ -27,7 +27,7 @@ import StaticTable from "../components/StaticTable.astro";
 <Layout title="Intercambio comercial Argentino" mainHeader="Síntesis">
         <section>
             <Collapsible sumaryText="Síntesis de los resultados">
-                <Texto1 class=" text-justify"/>
+                <Texto1 />
             </Collapsible>
             <Tabs id="tabsSaldo">
                 <Tab contentRef="graficoSaldo" defaultTab={true}>Exportaciones, importaciones y saldo comercial</Tab>
@@ -56,9 +56,9 @@ import StaticTable from "../components/StaticTable.astro";
             
         </section>
         <section class="mt-10">
-            <h3 class="text-xl font-semibold my-4">Índices de valores, precios y cantidades y efecto de los términos del intercambio de octubre de 2022</h3>
+            <h3 class="text-3xl font-semibold my-4">Índices de valores, precios y cantidades y efecto de los términos del intercambio de octubre de 2022</h3>
             <Collapsible sumaryText="Análisis">
-                <Texto2 class=" text-justify"/>
+                <Texto2 />
             </Collapsible>
             <Tabs id="otrasTabs">
                 <Tab contentRef="otraTab1" defaultTab={true}>otra tab</Tab>
