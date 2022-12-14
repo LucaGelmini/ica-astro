@@ -1,8 +1,35 @@
 ---
-import Layout from "../layouts/Layout.astro"
+import Layout from "../layouts/Layout.astro";
+import Grafico from "../components/grafico";
+import Tabs from "../layouts/Tabs.astro";
+import Tab from "../components/tab.astro";
+import TabsContent from "../layouts/TabsContent.astro";
+import Collapsible from "../layouts/Collapsible.astro";
+
+import plotUsosData from "../data/plots/plot_impo_usos.json"
+import tablaUsosData from "../data/cuadros/df_grafico2_tabla.json"
+import {Content as TextoImpo} from "../data/textos/impo_1.md"
+import StaticTable from "../components/StaticTable.astro";
+
 ---
 
 
 <Layout title="Importaciones">
-    Hola
+    <section>
+        <Collapsible sumaryText="Sobre las importaciones">
+            <TextoImpo />
+        </Collapsible>
+        <Tabs id="usos">
+            <Tab contentRef="graficoUsos" defaultTab={true}>Importación por usos económicos</Tab>
+            <Tab contentRef="cuadroUsos">Cuadro</Tab>
+        </Tabs>
+        <TabsContent tabsId="usos">
+            <div id="graficoUsos" class="w-full">
+                <Grafico  plotData={plotUsosData}  client:only/>
+            </div>
+            <div class="hidden w-full" id="cuadroUsos">
+                <StaticTable tableData={tablaUsosData} tableId="cuadroImpoUsos" roundNumeric={1}/>
+            </div>
+        </TabsContent>
+    </section>
 </Layout>
