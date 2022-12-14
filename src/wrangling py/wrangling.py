@@ -16,23 +16,37 @@ io.write_json(plot_desestacionalizado(df_plot_desest_impo),
 # Tablas
 df_grafico1_tabla.to_json(
     "./src/data/cuadros/df_grafico1_tabla.json", force_ascii=False, orient='table')
+
 cuadro5.to_json("./src/data/cuadros/cuadro5.json",
                 force_ascii=False, orient='table')
+
 cuadro6.to_json("./src/data/cuadros/cuadro6.json",
                 force_ascii=False, orient='table')
+
 df_grafico2_tabla.to_json(
     "./src/data/cuadros/df_grafico2_tabla.json", force_ascii=False, orient='table')
-c1.to_json("./src/data/cuadros/c1.json", force_ascii=False)
+
+c1.to_json("./src/data/cuadros/c1.json", force_ascii=False, orient='table')
+
 cuadro7.to_json("./src/data/cuadros/cuadro7.json",
                 force_ascii=False, orient='table')
-cuadro8.to_json("./src/data/cuadros/cuadro8.json",
-                force_ascii=False, orient='table')
+
+cuadro8.to_json(
+    "./src/data/cuadros/cuadro8.json",
+    force_ascii=False,
+    orient='table'
+)
+
 r2_df.to_json("./src/data/cuadros/r2_df.json",
               force_ascii=False, orient='table')
-c2.to_json("./src/data/cuadros/c2.json", force_ascii=False)
+
+c2.to_json("./src/data/cuadros/c2.json", force_ascii=False, orient='table')
+
 balanza.to_json("./src/data/cuadros/balanza.json",
                 force_ascii=False, orient='table')
+
 desest_tabla_expo.to_json(
     "./src/data/cuadros/tabla desestacionalizada.json", force_ascii=False, orient='table')
+
 desest_tabla_impo.to_json(
     "./src/data/cuadros/tabla desestacionalizada.json", force_ascii=False, orient='table')
