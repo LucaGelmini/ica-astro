@@ -55,6 +55,72 @@ const innerTitlesLogic = (index: number) => {
     return false;
 }
 
+const parseHeadersFromFields = (fields: Array<{name:string, type:string}>) => {
+    const re = /<([\s\w-]+)>/g
+    if (fields[0].name.search(re)===-1) return {multiHeaders: false, headersNames: fields.map(field=>field.name)};
+
+    const headersNamesMatrix = [];
+    fields.map(field => {    //con esto los extraigo y le saco los caracteres delimitantes
+            const fullColName = field.name;
+            return String(fullColName.match(re))
+            .replace(/[<>]/g, '')
+            .split('-');
+        })
+    .forEach(col=>{ //y aca transpongo la matriz para que me quede en el orden de [fila[columnas]]
+        for(let rowIdx:number = 0; rowIdx <col.length; rowIdx++){
+            headersNamesMatrix[rowIdx]===undefined?
+            headersNamesMatrix[rowIdx] = [col[rowIdx]]:
+            headersNamesMatrix[rowIdx].push(col[rowIdx])
+        }
+    });
+    
+    const headers:Array<Array<{name:string, colSpan:number, rowSpan:number}>>=
+    headersNamesMatrix.map((row, rowIdx)=>{
+        let colSpan = 1;
+        let lastCol:string;
+        let lastRow: string;
+        const outRow:Array<{name:string, colSpan:number, rowSpan:number}>=[]
+
+        row.forEach((col, colIdx)=>{
+            let rowSpan =1;
+            if(col===''&&colIdx===headersNamesMatrix.length) throw new Error('Empty string as low level column name');
+
+            if(col===lastRow) return;
+
+            if(col===''){
+                col = headersNamesMatrix[rowIdx][colIdx+1]
+                lastRow =col;
+                rowSpan++
+            };
+
+            if(col!==lastCol){
+                lastCol = col;
+                outRow.push({
+                    name: col,
+                    colSpan,
+                    rowSpan
+                })
+            }else{
+                colSpan++;
+                const e = outRow.pop()
+                e.colSpan=colSpan
+                outRow.push(e)
+            };
+
+
+        })
+        return outRow;
+    });
+
+
+    return {
+        multiHeaders: true,
+        headers
+    }
+}
+
+// console.log(parseHeadersFromFields(fields).headers)
+
 ---
 
 
@@ -62,12 +128,21 @@ const innerTitlesLogic = (index: number) => {
 <table id= {tableId} class="w-full">
     <DownloadCSVButton  />
     <thead>
+        {parseHeadersFromFields(fields).multiHeaders?
+        parseHeadersFromFields(fields).headers.map(row=>(
+            <tr class="text-center border-b-2 border-black ">
+                {row.map(col=>{
+                    return <th rowspan={String(col.rowSpan)} colspan={String(col.colSpan)}>{col.name}</th>
+                })}
+            </tr>
+        )):
         <tr class="text-center border-b-2 border-black ">
             {
             fields.map((field, i) => (
                 <th>{field.name}</th>
             ))}
-        </tr>
+        </tr>}
+        
     </thead>
     <tbody>
         {data.map((row,i) => (
