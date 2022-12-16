@@ -15,10 +15,8 @@ export interface Props{
     rowEmphasis?:Array<number>
 }
 
-interface HeaderRenderData {
-    multiHeaders: boolean,
-    headers: Array<Array<{name:string, colSpan:number, rowSpan:number}>>|Array<string>
-}
+type HeaderRenderData = Array<Array<{name:string, colSpan:number, rowSpan:number}>>
+
 
 let {tableData:{schema:{fields}, data}} = Astro.props;
 const {tableId, hideIndex= true, innerTitles=null, roundNumeric=1, rowEmphasis=[]} = Astro.props;
@@ -53,8 +51,6 @@ const prepareCells = (tableData:Array<object>, precision:number):Array<object>=>
 
 data = prepareCells(data, roundNumeric);
 
-
-const stripedTable = (index: number) => `${index%2===0?"bg-gray-50":"bg-gray-100"} hover:bg-gray-200`;
 const innerTitlesLogic = (index: number) => {
     if(hideIndex && index ===0) return true;
     if(!hideIndex && (index===1)) return true;
@@ -63,7 +59,9 @@ const innerTitlesLogic = (index: number) => {
 
 const parseHeadersFromFields = (fields: Array<{name:string, type:string}>): HeaderRenderData => {
     const re = /<([\s\w-]+)>/g
-    if (fields[0].name.search(re)===-1) return {multiHeaders: false, headers: fields.map(field=>field.name)};
+    if (fields[0].name.search(re)===-1) return [
+        fields.map(field=>({name: field.name, colSpan:1, rowSpan:1}))
+    ];
 
     const headersNamesMatrix: Array<Array<string>> = [];
     fields.map(field => {    //con esto los extraigo y le saco los caracteres delimitantes
@@ -117,13 +115,9 @@ const parseHeadersFromFields = (fields: Array<{name:string, type:string}>): Head
     });
 
 
-    return {
-        multiHeaders: true,
-        headers
-    }
+    return headers
 }
 
-// console.log(parseHeadersFromFields(fields).headers)
 
 ---
 
@@ -132,25 +126,19 @@ const parseHeadersFromFields = (fields: Array<{name:string, type:string}>): Head
 <table id= {tableId} class="w-full">
     <DownloadCSVButton  />
     <thead>
-        {parseHeadersFromFields(fields).multiHeaders?
-        parseHeadersFromFields(fields).headers.map(row=>(
+        {
+        parseHeadersFromFields(fields).map(row=>(
             <tr class="text-center border-b-2 border-black ">
                 {row.map(col=>{
                     return <th rowspan={String(col.rowSpan)} colspan={String(col.colSpan)}>{col.name}</th>
                 })}
             </tr>
-        )):
-        <tr class="text-center border-b-2 border-black ">
-            {
-            fields.map((field, i) => (
-                <th>{field.name}</th>
-            ))}
-        </tr>}
+        ))}
         
     </thead>
     <tbody>
         {data.map((row,i) => (
-            <tr class:list={stripedTable(i)}>
+            <tr class={`${i%2===0?"bg-gray-50":"bg-gray-100"} hover:bg-gray-200`}>
                 {Object.values(row).map((cell, colNumber) => (
                     <>
                     {innerTitles && innerTitles.includes(i)?
