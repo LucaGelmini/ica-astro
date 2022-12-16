@@ -1,0 +1,155 @@
+---
+import DownloadCSVButton from './DownloadCSVButton.astro'
+
+export interface Props{
+    tableData: {
+        data: Array<any>,
+        schema: {
+            fields: Array<{name:string, type:string}>
+        }
+    },
+    tableId: string,
+    hideIndex?: boolean,
+    innerTitles?: Array<number>|null,
+    roundNumeric?: number,
+    rowEmphasis?:Array<number>
+}
+
+type HeaderRenderData = Array<Array<{name:string, colSpan:number, rowSpan:number}>>
+
+
+let {tableData:{schema:{fields}, data}} = Astro.props;
+const {tableId, hideIndex= true, innerTitles=null, roundNumeric=1, rowEmphasis=[]} = Astro.props;
+
+
+
+// wrangling data to render
+
+if(hideIndex){
+    fields = fields.slice(1);
+    data = data.map(o=>{
+        let {index, ...rest} = o;
+        return rest
+    })
+}
+
+const prepareCells = (tableData:Array<object>, precision:number):Array<object>=>(
+    tableData.map(row=>{
+        for(let col in row){
+            if(fields.filter(f=>f.name===col)[0].type==="number" && row[col]!==null) { //si la columna es tipo numero y es diferente de null
+                if(typeof row[col]==='string' && row[col].includes(',')) break; //si ya la procesaste y tiene ',' break
+                let [integer, decimal]=Number(row[col]) // redondeo y coma
+                    .toFixed(precision)
+                    .split('.');
+                row[col] = decimal !== '0'? integer+','+decimal : integer;
+                
+            }
+        }
+        return row
+    })
+)
+
+data = prepareCells(data, roundNumeric);
+
+const innerTitlesLogic = (index: number) => {
+    if(hideIndex && index ===0) return true;
+    if(!hideIndex && (index===1)) return true;
+    return false;
+}
+
+const parseHeadersFromFields = (fields: Array<{name:string, type:string}>): HeaderRenderData => {
+    const re = /<([\s\w-]+)>/g
+    if (fields[0].name.search(re)===-1) return [
+        fields.map(field=>({name: field.name, colSpan:1, rowSpan:1}))
+    ];
+
+    const headersNamesMatrix: Array<Array<string>> = [];
+    fields.map(field => {    //con esto los extraigo y le saco los caracteres delimitantes
+            const fullColName = field.name;
+            return String(fullColName.match(re))
+            .replace(/[<>]/g, '')
+            .split('-');
+        })
+    .forEach(col=>{ //y aca transpongo la matriz para que me quede en el orden de [fila[columnas]]
+        for(let rowIdx:number = 0; rowIdx <col.length; rowIdx++){
+            headersNamesMatrix[rowIdx]===undefined?
+            headersNamesMatrix[rowIdx] = [col[rowIdx]]:
+            headersNamesMatrix[rowIdx].push(col[rowIdx])
+        }
+    });
+    
+    let lastInCol: string;
+    const headers=headersNamesMatrix.map((row, rowIdx)=>{
+        let colSpan = 1;
+        let lastInRow:string;
+        const outRow:Array<{name:string, colSpan:number, rowSpan:number}>=[]
+
+        row.forEach((col, colIdx)=>{
+            let rowSpan =1;
+            if(col===''&&colIdx===(headersNamesMatrix.length-1)) throw new Error('Empty string in lowest level column name');
+            
+            if(col===lastInCol) return;
+
+            if(col===''){
+                col = headersNamesMatrix[rowIdx+1][colIdx]
+                lastInCol =col;
+                rowSpan++
+            };
+            if(col!==lastInRow){
+                lastInRow = col;
+                outRow.push({
+                    name: col,
+                    colSpan,
+                    rowSpan
+                });
+            }else{
+                colSpan++;
+                const e = outRow.pop()
+                e.colSpan=colSpan
+                outRow.push(e)
+            };
+
+
+        })
+        return outRow;
+    });
+
+
+    return headers
+}
+
+
+---
+
+
+
+<table id= {tableId} class="w-full">
+    <DownloadCSVButton  />
+    <thead>
+        {
+        parseHeadersFromFields(fields).map(row=>(
+            <tr class="text-center border-b-2 border-black ">
+                {row.map(col=>{
+                    return <th rowspan={String(col.rowSpan)} colspan={String(col.colSpan)}>{col.name}</th>
+                })}
+            </tr>
+        ))}
+        
+    </thead>
+    <tbody>
+        {data.map((row,i) => (
+            <tr class={`${i%2===0?"bg-gray-50":"bg-gray-100"} hover:bg-gray-200`}>
+                {Object.values(row).map((cell, colNumber) => (
+                    <>
+                    {innerTitles && innerTitles.includes(i)?
+                    innerTitlesLogic(colNumber)?<th colspan={`${Object.values(row).length}`}>{cell}</th>:null
+                    :
+                    <td class={rowEmphasis.includes(i)?'font-semibold':''}>{cell}</td>}
+                    </>
+                ))}
+            </tr>
+        ))}
+    </tbody>
+</table>
+
+
