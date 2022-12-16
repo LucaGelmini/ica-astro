@@ -14,6 +14,12 @@ export interface Props{
     roundNumeric?: number,
     rowEmphasis?:Array<number>
 }
+
+interface HeaderRenderData {
+    multiHeaders: boolean,
+    headers: Array<Array<{name:string, colSpan:number, rowSpan:number}>>|Array<string>
+}
+
 let {tableData:{schema:{fields}, data}} = Astro.props;
 const {tableId, hideIndex= true, innerTitles=null, roundNumeric=1, rowEmphasis=[]} = Astro.props;
 
@@ -55,11 +61,11 @@ const innerTitlesLogic = (index: number) => {
     return false;
 }
 
-const parseHeadersFromFields = (fields: Array<{name:string, type:string}>) => {
+const parseHeadersFromFields = (fields: Array<{name:string, type:string}>): HeaderRenderData => {
     const re = /<([\s\w-]+)>/g
-    if (fields[0].name.search(re)===-1) return {multiHeaders: false, headersNames: fields.map(field=>field.name)};
+    if (fields[0].name.search(re)===-1) return {multiHeaders: false, headers: fields.map(field=>field.name)};
 
-    const headersNamesMatrix = [];
+    const headersNamesMatrix: Array<Array<string>> = [];
     fields.map(field => {    //con esto los extraigo y le saco los caracteres delimitantes
             const fullColName = field.name;
             return String(fullColName.match(re))
@@ -74,32 +80,30 @@ const parseHeadersFromFields = (fields: Array<{name:string, type:string}>) => {
         }
     });
     
-    const headers:Array<Array<{name:string, colSpan:number, rowSpan:number}>>=
-    headersNamesMatrix.map((row, rowIdx)=>{
+    let lastInCol: string;
+    const headers=headersNamesMatrix.map((row, rowIdx)=>{
         let colSpan = 1;
-        let lastCol:string;
-        let lastRow: string;
+        let lastInRow:string;
         const outRow:Array<{name:string, colSpan:number, rowSpan:number}>=[]
 
         row.forEach((col, colIdx)=>{
             let rowSpan =1;
-            if(col===''&&colIdx===headersNamesMatrix.length) throw new Error('Empty string as low level column name');
-
-            if(col===lastRow) return;
+            if(col===''&&colIdx===(headersNamesMatrix.length-1)) throw new Error('Empty string in lowest level column name');
+            
+            if(col===lastInCol) return;
 
             if(col===''){
-                col = headersNamesMatrix[rowIdx][colIdx+1]
-                lastRow =col;
+                col = headersNamesMatrix[rowIdx+1][colIdx]
+                lastInCol =col;
                 rowSpan++
             };
-
-            if(col!==lastCol){
-                lastCol = col;
+            if(col!==lastInRow){
+                lastInRow = col;
                 outRow.push({
                     name: col,
                     colSpan,
                     rowSpan
-                })
+                });
             }else{
                 colSpan++;
                 const e = outRow.pop()
