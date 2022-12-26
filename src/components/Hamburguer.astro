@@ -1,0 +1,27 @@
+---
+export interface Props {
+    id: string;
+    menuId: string;
+};
+
+const {menuId, id} = Astro.props;
+---
+
+<button type="button" class="transition-all lg:hidden" id={id}>
+    <svg viewBox='0 0 30 30' class="w-10 h-10">
+        <path stroke='rgba(0, 0, 0, 0.75)' stroke-width='2' stroke-linecap='round' stroke-miterlimit='10' d='M4 7h22M4 15h22M4 23h22'/>
+    </svg>
+</button>
+
+<script define:vars={{menuId, id}}>
+    const hamburguer = document.querySelector('#'+id);
+    hamburguer.onclick = ()=>{
+        const menu = document.querySelector('#'+menuId);
+        menu.classList.toggle('transform');
+        menu.classList.toggle('scale-y-0');
+
+        // menu.classList.toggle('h-full');
+        };
+</script>
+
+
