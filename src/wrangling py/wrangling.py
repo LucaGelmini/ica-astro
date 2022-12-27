@@ -2,6 +2,7 @@ from modules.expo import df_grafico1_tabla, plot_expo_rubros, cuadro5, cuadro6
 from modules.impo import df_grafico2_tabla, plot_impo_usos, cuadro7, cuadro8
 from modules.index import r2_df, c1, c2_expo, c2_impo, balanza, plot_agregado
 from modules.desestacional import plot_desestacionalizado, desest_tabla_expo, desest_tabla_impo, df_plot_desest_expo, df_plot_desest_impo
+from modules.socios import tablas_socios, plots_socios
 import plotly.io as io
 
 # Exportar a json
@@ -13,6 +14,12 @@ io.write_json(plot_desestacionalizado(df_plot_desest_expo),
               file="./src/data/plots/plot_desestacionalizado_expo.json")
 io.write_json(plot_desestacionalizado(df_plot_desest_impo),
               file="./src/data/plots/plot_desestacionalizado_impo.json")
+
+io.write_json(plots_socios[0], file="./src/data/plots/sunburst_socios_impo_mensual.json")
+io.write_json(plots_socios[1], file="./src/data/plots/sunburst_socios_impo_acumulado.json")
+io.write_json(plots_socios[2], file="./src/data/plots/anillo_socios_expo_mensual.json")
+io.write_json(plots_socios[3], file="./src/data/plots/anillo_socios_expo_acumulado.json")
+
 # Tablas
 df_grafico1_tabla.to_json(
     "./src/data/cuadros/df_grafico1_tabla.json", force_ascii=False, orient='table')
@@ -53,3 +60,12 @@ desest_tabla_expo.to_json(
 
 desest_tabla_impo.to_json(
     "./src/data/cuadros/tabla desestacionalizada.json", force_ascii=False, orient='table')
+
+tablas_socios[0].to_json("./src/data/cuadros/socios_impo_mensual.json",
+         force_ascii=False, orient='table')
+tablas_socios[1].to_json("./src/data/cuadros/socios_impo_acumulado.json",
+         force_ascii=False, orient='table')
+tablas_socios[2].to_json("./src/data/cuadros/socios_expo_mensual.json",
+         force_ascii=False, orient='table')
+tablas_socios[3].to_json("./src/data/cuadros/socios_expo_acumulado.json",
+              force_ascii=False, orient='table')
