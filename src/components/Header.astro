@@ -10,13 +10,19 @@ const  pages:object = {
 
 ---
 <header>
-    <nav class="px-4 h-12  bg-gray-100 border border-gray-200 flex items-center justify-between">
-        <a href="/" class="h-full flex items-center"><h1 class=" font-semibold text-lg text-gray-500">
-            Intercambio comercial argentino
-        </h1></a>
-        <Hamburguer/>
-        <Navigation pages={pages}/>
-
-
+    <nav>
+        <div class="px-4 h-12  bg-gray-100 border-b border-gray-200 flex items-center justify-between">
+            <a href="/" class="h-full flex items-center"><h1 class=" font-semibold text-lg text-gray-500">
+                Intercambio comercial argentino
+            </h1></a>
+            <Hamburguer menuId="collapsibleHeader" id="hamburguer"/>
+            <Navigation pages={pages}/>
+        </div>
+        <ul class="h-0 border-b border-gray-300 bg-gray-200 overflow-hidden origin-top duration-300 scale-y-0 lg:hidden" id="collapsibleHeader">
+            {Object.keys(pages)
+                .map(page=><li class="w-full h-full px-2 my-5 border-b border-gray-600 hover:bg-gray-200">
+                    <a href={pages[page]}><p>{page}</p></a>
+                </li>)}
+        </ul>
     </nav>
 </header>
