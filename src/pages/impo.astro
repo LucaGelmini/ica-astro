@@ -6,14 +6,13 @@ import Tab from "../components/tab.astro";
 import TabsContent from "../layouts/TabsContent.astro";
 import Collapsible from "../layouts/Collapsible.astro";
 
-import plotUsosData from "../data/plots/plot_impo_usos.json"
-import dataDesestImpo from "../data/plots/plot_desestacionalizado_impo.json"
-import tablaUsosData from "../data/cuadros/df_grafico2_tabla.json"
-import {Content as TextoImpo} from "../data/textos/impo_1.md"
+import plotUsosData from "../data/plots/plot_impo_usos.json";
+import dataDesestImpo from "../data/plots/plot_desestacionalizado_impo.json";
+import tablaUsosData from "../data/cuadros/df_grafico2_tabla.json";
+import tablaDesestData from "../data/cuadros/tabla desestacionalizada.json";
+import { Content as TextoImpo } from "../data/textos/impo_1.md";
 import StaticTable from "../components/tables/StaticTable.astro";
-
 ---
-
 
 <Layout title="Importaciones">
     <section>
@@ -21,16 +20,30 @@ import StaticTable from "../components/tables/StaticTable.astro";
             <TextoImpo />
         </Collapsible>
         <Tabs id="usos">
-            <Tab contentRef="graficoUsos" defaultTab={true}>Importación por usos económicos</Tab>
+            <Tab contentRef="graficoUsos" defaultTab={true}
+                >Importación por usos económicos</Tab
+            >
             <Tab contentRef="serieDes">Serie desestacionalizada</Tab>
         </Tabs>
         <TabsContent tabsId="usos">
             <div id="graficoUsos" class="w-full">
-                <Grafico  plotData={plotUsosData}  client:only/>
-                <StaticTable tableData={tablaUsosData} tableId="cuadroImpoUsos" roundNumeric={1}/>
+                <Grafico plotData={plotUsosData} client:only />
+                <StaticTable
+                    tableData={tablaUsosData}
+                    tableId="cuadroImpoUsos"
+                    roundNumeric={1}
+                />
             </div>
             <div class="hidden w-full" id="serieDes">
                 <Grafico plotData={dataDesestImpo} client:only />
+                <div class="w-full overflow-x-auto">
+                    <StaticTable
+                        tableData={tablaDesestData}
+                        tableId="cuadroImpoDesest"
+                        roundNumeric={1}
+                        hideIndex={false}
+                    />
+                </div>
             </div>
         </TabsContent>
     </section>
