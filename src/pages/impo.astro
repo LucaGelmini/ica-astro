@@ -7,6 +7,7 @@ import TabsContent from "../layouts/TabsContent.astro";
 import Collapsible from "../layouts/Collapsible.astro";
 
 import plotUsosData from "../data/plots/plot_impo_usos.json"
+import dataDesestImpo from "../data/plots/plot_desestacionalizado_impo.json"
 import tablaUsosData from "../data/cuadros/df_grafico2_tabla.json"
 import {Content as TextoImpo} from "../data/textos/impo_1.md"
 import StaticTable from "../components/tables/StaticTable.astro";
@@ -21,14 +22,15 @@ import StaticTable from "../components/tables/StaticTable.astro";
         </Collapsible>
         <Tabs id="usos">
             <Tab contentRef="graficoUsos" defaultTab={true}>Importación por usos económicos</Tab>
-            <Tab contentRef="cuadroUsos">Cuadro</Tab>
+            <Tab contentRef="serieDes">Serie desestacionalizada</Tab>
         </Tabs>
         <TabsContent tabsId="usos">
             <div id="graficoUsos" class="w-full">
                 <Grafico  plotData={plotUsosData}  client:only/>
-            </div>
-            <div class="hidden w-full" id="cuadroUsos">
                 <StaticTable tableData={tablaUsosData} tableId="cuadroImpoUsos" roundNumeric={1}/>
+            </div>
+            <div class="hidden w-full" id="serieDes">
+                <Grafico plotData={dataDesestImpo} client:only />
             </div>
         </TabsContent>
     </section>

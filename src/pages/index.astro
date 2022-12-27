@@ -6,8 +6,6 @@ import Tab from "../components/tab.astro";
 import TabsContent from "../layouts/TabsContent.astro";
 
 import data from "../data/plots/plot_agregado.json"
-import dataDesestExpo from "../data/plots/plot_desestacionalizado_expo.json"
-import dataDesestImpo from "../data/plots/plot_desestacionalizado_impo.json"
 import r2Data from "../data/cuadros/r2_df.json"
 import c2Expo from "../data/cuadros/c2_expo.json"
 import c2Impo from "../data/cuadros/c2_impo.json"
@@ -30,8 +28,6 @@ import StaticTable from "../components/tables/StaticTable.astro";
             <Tabs id="tabsSaldo">
                 <Tab contentRef="graficoSaldo" defaultTab={true}>Exportaciones, importaciones y saldo comercial</Tab>
                 <Tab contentRef="tabla1"> Principales indicadores </Tab>
-                <Tab contentRef="desestExpo">Serie desestacionalizada de exportaciones</Tab>
-                <Tab contentRef="desestImpo">Serie desestacionalizada de importaciones</Tab>
             </Tabs>
     
             <TabsContent tabsId="tabsSaldo">
@@ -43,12 +39,6 @@ import StaticTable from "../components/tables/StaticTable.astro";
                     <!-- <CuadroR2 tableData = {r2Data} client:only /> -->
                     <!-- <SuperTable client:only /> -->
                 </div>
-                <div id="desestExpo" class="w-full hidden">
-                    <Grafico plotData={dataDesestExpo} client:only />
-                </div>
-                <div id="desestImpo" class="w-full hidden">
-                    <Grafico plotData={dataDesestImpo} client:only />
-                </div>
             </TabsContent>
     
             
@@ -57,21 +47,20 @@ import StaticTable from "../components/tables/StaticTable.astro";
             <h3 class="text-3xl font-semibold my-4">
                 Índices de valores, precios y cantidades y efecto de los términos del intercambio de octubre de 2022
             </h3>
-            <Collapsible sumaryText="Análisis">
-                <Texto2 />
-            </Collapsible>
             <Tabs id="otrasTabs">
                 <Tab contentRef="otraTab1" defaultTab={true}>Exportaciones</Tab>
                 <Tab contentRef="otraTab2">Importaciones</Tab>
             </Tabs>
-    
             <TabsContent tabsId="otrasTabs">
-                <div id="otraTab1" class=" overflow-x-auto">
+                <div id="otraTab1" class=" overflow-x-auto w-full">
                     <StaticTable tableData={c2Expo} tableId="c2Expo" roundNumeric={1}/>
                 </div>
-                <div id="otraTab2" class=" overflow-x-auto hidden">
+                <div id="otraTab2" class=" overflow-x-auto hidden w-full">
                     <StaticTable tableData={c2Impo} tableId="c2Impo" roundNumeric={1}/>
                 </div>
             </TabsContent>
+            <Collapsible sumaryText="Análisis">
+                <Texto2 />
+            </Collapsible>
         </section>
 </Layout>
