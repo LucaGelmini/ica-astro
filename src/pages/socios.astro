@@ -1,0 +1,33 @@
+---
+import Tab from "../components/tab.astro";
+import Layout from "../layouts/Layout.astro";
+import Tabs from "../layouts/Tabs.astro";
+import TabsContent from "../layouts/TabsContent.astro";
+import Grafico from "../components/grafico.jsx";
+
+import dataAnilloExpoAcumulado from "../data/plots/anillo_socios_expo_acumulado.json";
+import dataSunburstImpoAcumulado from "../data/plots/sunburst_socios_impo_acumulado.json";
+import dataAnilloExpoMes from "../data/plots/anillo_socios_expo_acumulado.json";
+import dataSunburstImpoMes from "../data/plots/sunburst_socios_impo_acumulado.json";
+---
+
+<Layout title="Socios comerciales" mainHeader="Principales socios comerciales">
+    <section>
+        <Tabs id="tabsSocios">
+            <Tab contentRef="sociosExpo" defaultTab={true}>
+                Para las exportaciones</Tab
+            >
+            <Tab contentRef="sociosImpo">Para las importaciones</Tab>
+        </Tabs>
+        <TabsContent tabsId="tabsSocios">
+            <div id="sociosExpo">
+                <Grafico plotData={dataAnilloExpoMes} client:only />
+                <Grafico plotData={dataAnilloExpoAcumulado} client:only />
+            </div>
+            <div id="sociosImpo" class="hidden">
+                <Grafico plotData={dataSunburstImpoMes} client:only />
+                <Grafico plotData={dataSunburstImpoAcumulado} client:only />
+            </div>
+        </TabsContent>
+    </section>
+</Layout>
