@@ -7,26 +7,28 @@ import Grafico from "../components/grafico.jsx";
 
 import dataAnilloExpoAcumulado from "../data/plots/anillo_socios_expo_acumulado.json";
 import dataSunburstImpoAcumulado from "../data/plots/sunburst_socios_impo_acumulado.json";
-import dataAnilloExpoMes from "../data/plots/anillo_socios_expo_acumulado.json";
-import dataSunburstImpoMes from "../data/plots/sunburst_socios_impo_acumulado.json";
+import dataAnilloExpoMes from "../data/plots/anillo_socios_expo_mensual.json";
+import dataSunburstImpoMes from "../data/plots/sunburst_socios_impo_mensual.json";
 ---
 
 <Layout title="Socios comerciales" mainHeader="Principales socios comerciales">
     <section>
         <Tabs id="tabsSocios">
-            <Tab contentRef="sociosExpo" defaultTab={true}>
-                Para las exportaciones</Tab
-            >
-            <Tab contentRef="sociosImpo">Para las importaciones</Tab>
+            <Tab contentRef="mensual" defaultTab={true}>Último mes</Tab>
+            <Tab contentRef="acumulado">Acumulado</Tab>
         </Tabs>
         <TabsContent tabsId="tabsSocios">
-            <div id="sociosExpo">
-                <Grafico plotData={dataAnilloExpoMes} client:only />
-                <Grafico plotData={dataAnilloExpoAcumulado} client:only />
+            <div id="mensual">
+                <div class="grid grid-cols-2">
+                    <Grafico plotData={dataAnilloExpoMes} client:only />
+                    <Grafico plotData={dataSunburstImpoMes} client:only />
+                </div>
             </div>
-            <div id="sociosImpo" class="hidden">
-                <Grafico plotData={dataSunburstImpoMes} client:only />
-                <Grafico plotData={dataSunburstImpoAcumulado} client:only />
+            <div id="acumulado" class="hidden">
+                <div class="grid grid-cols-2">
+                    <Grafico plotData={dataAnilloExpoAcumulado} client:only />
+                    <Grafico plotData={dataSunburstImpoAcumulado} client:only />
+                </div>
             </div>
         </TabsContent>
     </section>
