@@ -3,6 +3,7 @@ from modules.impo import df_grafico2_tabla, plot_impo_usos, cuadro7, cuadro8
 from modules.index import r2_df, c1, c2_expo, c2_impo, balanza, plot_agregado
 from modules.desestacional import plot_desestacionalizado, desest_tabla_expo, desest_tabla_impo, df_plot_desest_expo, df_plot_desest_impo
 from modules.socios import tablas_socios, plots_socios
+from modules.rubros_usos import plots_rubros_usos
 import plotly.io as io
 
 # Exportar a json
@@ -19,6 +20,8 @@ io.write_json(plots_socios[0], file="./src/data/plots/sunburst_socios_impo_mensu
 io.write_json(plots_socios[1], file="./src/data/plots/sunburst_socios_impo_acumulado.json")
 io.write_json(plots_socios[2], file="./src/data/plots/anillo_socios_expo_mensual.json")
 io.write_json(plots_socios[3], file="./src/data/plots/anillo_socios_expo_acumulado.json")
+io.write_json(plots_rubros_usos[0], file="./src/data/plots/sunburst_rubros_usos_mensual.json")
+io.write_json(plots_rubros_usos[1], file="./src/data/plots/sunburst_rubros_usos_acumulado.json")
 
 # Tablas
 df_grafico1_tabla.to_json(

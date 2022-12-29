@@ -168,7 +168,7 @@ def plot_sunburst_socios(df_impo, acumulado:bool):
             colorscale='Sunsetdark',
             # cmid=average_score
             ),
-        hovertemplate='<b>%{label} </b> <br> CIF: $%{value}<br> Proporcion: %{color:.2%}', #Me jode la proporcion, sí o sí entra por color
+        hovertemplate='<b>%{label} </b> <br> CIF: $%{value:,.2f}<br> Proporcion: %{color:.2%}', #Me jode la proporcion, sí o sí entra por color
         name='',
         maxdepth=2
         ))
@@ -180,7 +180,6 @@ def plot_sunburst_socios(df_impo, acumulado:bool):
                     ) 
     
     return fig
-
 # Exportaciones
 
 tablas_socios = [
