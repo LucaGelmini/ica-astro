@@ -1,7 +1,6 @@
-import Plot from "react-plotly.js";
 import { useLayoutEffect, useRef, useState } from "react";
 import { useInView } from "react-intersection-observer";
-
+import Plot from "react-plotly.js";
 const GraficoPrueba = ({ plotData }) => {
     const [width, setWidth] = useState(0);
     const [height, setHeight] = useState(0);
