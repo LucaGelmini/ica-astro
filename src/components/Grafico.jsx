@@ -1,7 +1,8 @@
 import { useLayoutEffect, useRef, useState } from "react";
 import { useInView } from "react-intersection-observer";
 import Plot from "react-plotly.js";
-const GraficoPrueba = ({ plotData }) => {
+
+const Grafico = ({ plotData, divClassName = "w-full h-[500px]" }) => {
     const [width, setWidth] = useState(0);
     const [height, setHeight] = useState(0);
 
@@ -15,7 +16,7 @@ const GraficoPrueba = ({ plotData }) => {
     }, [inView]);
 
     return (
-        <div ref={ref} className={"w-full h-[500px]"}>
+        <div ref={ref} className={divClassName}>
             <Plot
                 data={plotData.data}
                 layout={{
@@ -44,4 +45,4 @@ const GraficoPrueba = ({ plotData }) => {
     );
 };
 
-export default GraficoPrueba;
+export default Grafico;

@@ -3,7 +3,7 @@ import Tab from "../components/tab.astro";
 import Layout from "../layouts/Layout.astro";
 import Tabs from "../layouts/Tabs.astro";
 import TabsContent from "../layouts/TabsContent.astro";
-import Grafico from "../components/grafico.jsx";
+import Grafico from "../components/Grafico.jsx";
 
 import dataAnilloExpoAcumulado from "../data/plots/anillo_socios_expo_acumulado.json";
 import dataSunburstImpoAcumulado from "../data/plots/sunburst_socios_impo_acumulado.json";
@@ -20,14 +20,23 @@ import dataSunburstImpoMes from "../data/plots/sunburst_socios_impo_mensual.json
         <TabsContent tabsId="tabsSocios">
             <div id="mensual">
                 <div class="grid grid-cols-2">
-                    <Grafico plotData={dataAnilloExpoMes} client:only />
-                    <Grafico plotData={dataSunburstImpoMes} client:only />
+                    <Grafico plotData={dataAnilloExpoMes} client:only="react" />
+                    <Grafico
+                        plotData={dataSunburstImpoMes}
+                        client:only="react"
+                    />
                 </div>
             </div>
             <div id="acumulado" class="hidden">
                 <div class="grid grid-cols-2">
-                    <Grafico plotData={dataAnilloExpoAcumulado} client:only />
-                    <Grafico plotData={dataSunburstImpoAcumulado} client:only />
+                    <Grafico
+                        plotData={dataAnilloExpoAcumulado}
+                        client:only="react"
+                    />
+                    <Grafico
+                        plotData={dataSunburstImpoAcumulado}
+                        client:only="react"
+                    />
                 </div>
             </div>
         </TabsContent>

@@ -1,6 +1,6 @@
 ---
 import Layout from "../layouts/Layout.astro";
-import Grafico from "../components/grafico";
+import Grafico from "../components/Grafico";
 import Tabs from "../layouts/Tabs.astro";
 import Tab from "../components/tab.astro";
 import TabsContent from "../layouts/TabsContent.astro";
@@ -27,7 +27,7 @@ import StaticTable from "../components/tables/StaticTable.astro";
         </Tabs>
         <TabsContent tabsId="usos">
             <div id="graficoUsos" class="w-full">
-                <Grafico plotData={plotUsosData} client:only />
+                <Grafico plotData={plotUsosData} client:only="react" />
                 <StaticTable
                     tableData={tablaUsosData}
                     tableId="cuadroImpoUsos"
@@ -35,7 +35,7 @@ import StaticTable from "../components/tables/StaticTable.astro";
                 />
             </div>
             <div class="hidden w-full" id="serieDes">
-                <Grafico plotData={dataDesestImpo} client:only />
+                <Grafico plotData={dataDesestImpo} client:only="react" />
                 <div class="w-full overflow-x-auto">
                     <StaticTable
                         tableData={tablaDesestData}

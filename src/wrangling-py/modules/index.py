@@ -11,7 +11,7 @@ locale.setlocale(locale.LC_ALL, 'es_ES')
 
 # %%
 r2_df = pd.read_excel(
-    "./src/wrangling py/data/ICA_esqueleto.xlsx", sheet_name="R2", skiprows=3)
+    "./src/wrangling-py/data/ICA_esqueleto.xlsx", sheet_name="R2", skiprows=3)
 r2_df.fillna("")
 
 # %%
@@ -19,14 +19,14 @@ header = [np.array(['', 'Exportación', 'Exportación', 'Exportación', 'Exporta
           np.array(['', '2022e', '2021*', 'Variación porcentual igual período año anterior', 'Variación porcentual acumulado igual período año anterior',
                     '2022*', "2021*", 'Variación porcentual igual período año anterior', 'Variación porcentual acumulado igual período año anterior',
                     "2022*", "2021*"])]
-c1 = pd.read_excel("./src/wrangling py/data/ICA_esqueleto.xlsx",
+c1 = pd.read_excel("./src/wrangling-py/data/ICA_esqueleto.xlsx",
                    sheet_name="c 1", skiprows=11)
 
 c1_columnas = ["<"+a+" - "+b+">" for a, b in zip(header[0], header[1])]
 c1.columns = c1_columnas
 
 # %%
-c2 = pd.read_excel("./src/wrangling py/data/ICA_esqueleto.xlsx",
+c2 = pd.read_excel("./src/wrangling-py/data/ICA_esqueleto.xlsx",
                    sheet_name="c 2", skiprows=5)
 c2_columnas = [np.array(["Octubre 2022"]*4), np.array([" - "]*4),
                np.array(["", "Valor", "Precio", "Cantidad"])]
@@ -42,7 +42,7 @@ for (c, tipo) in [(c2_expo, 'Rubros'), (c2_impo, 'Usos')]:
 
 # %%
 balanza = pd.read_csv(
-    "./src/wrangling py/data/SerieHistorica.csv", sep=";", decimal=",")
+    "./src/wrangling-py/data/SerieHistorica.csv", sep=";", decimal=",")
 balanza.index = pd.to_datetime(
     (balanza.Mes.astype(str) + "-"+balanza["Año"].astype(str)))  # type:ignore
 balanza = balanza["2011":]
