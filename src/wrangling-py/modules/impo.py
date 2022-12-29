@@ -5,7 +5,7 @@ import plotly.io as io
 
 # %%
 df_grafico2_tabla = pd.read_excel(
-    "./src/wrangling py/data/ICA_esqueleto.xlsx", sheet_name="graf2 impo.usos.", skiprows=1)
+    "./src/wrangling-py/data/ICA_esqueleto.xlsx", sheet_name="graf2 impo.usos.", skiprows=1)
 df_grafico2_tabla = df_grafico2_tabla[df_grafico2_tabla.columns[[
     0, 1, 2]]].dropna(axis=0)  # type:ignore
 df_grafico2_tabla[df_grafico2_tabla.columns[1]
@@ -37,17 +37,17 @@ plot_impo_usos.data[0].hovertemplate = 'Periodo: Octubre 2021*<br>Uso: %{x}<br>D
 plot_impo_usos.data[1].hovertemplate = 'Periodo: Octubre 2022*<br>Uso: %{x}<br>Dolares: $%{y}<extra></extra>'
 
 
-# io.write_json(plot_impo_usos, file = "./src/wrangling py/data/impo_usos.json")
+# io.write_json(plot_impo_usos, file = "./src/wrangling-py/data/impo_usos.json")
 plot_impo_usos
 
 # %%
 # Aclarar que es en millones de USD
 cuadro7 = pd.read_excel(
-    "./src/wrangling py/data/ICA_esqueleto.xlsx", sheet_name="c7", skiprows=4)[1:]
+    "./src/wrangling-py/data/ICA_esqueleto.xlsx", sheet_name="c7", skiprows=4)[1:]
 cuadro7.head()
 
 # %%
 cuadro8 = pd.read_excel(
-    "./src/wrangling py/data/ICA_esqueleto.xlsx", sheet_name="c8", skiprows=3)[1:]
+    "./src/wrangling-py/data/ICA_esqueleto.xlsx", sheet_name="c8", skiprows=3)[1:]
 cuadro8 = cuadro8.fillna("-")
 cuadro8.head()

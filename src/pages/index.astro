@@ -1,6 +1,6 @@
 ---
 import Layout from "../layouts/Layout.astro";
-import Grafico from "../components/grafico";
+import Grafico from "../components/Grafico";
 import Tabs from "../layouts/Tabs.astro";
 import Tab from "../components/tab.astro";
 import TabsContent from "../layouts/TabsContent.astro";
@@ -15,17 +15,12 @@ import Collapsible from "../layouts/Collapsible.astro";
 import { Content as Texto1 } from "../data/textos/index_1.md";
 import { Content as Texto2 } from "../data/textos/index_2.md";
 import StaticTable from "../components/tables/StaticTable.astro";
+import MainDashborad from "../components/mainDashboard/MainDashborad.astro";
 ---
 
 <Layout title="Intercambio comercial Argentino" mainHeader="Síntesis">
     <section>
-        <div>sunburst</div>
-        <div>leyenda</div>
-        <div class="grid grid-cols-3">
-            <div>Expo</div>
-            <div>Saldo</div>
-            <div>Impo</div>
-        </div>
+        <MainDashborad />
     </section>
     <section>
         <Collapsible sumaryText="Síntesis de los resultados">
@@ -40,7 +35,7 @@ import StaticTable from "../components/tables/StaticTable.astro";
 
         <TabsContent tabsId="tabsSaldo">
             <div id="graficoSaldo" class="w-full">
-                <Grafico plotData={data} client:only />
+                <Grafico plotData={data} client:only="react" />
             </div>
             <div id="tabla1" class="hidden w-full overflow-x-auto">
                 <StaticTable
@@ -51,8 +46,8 @@ import StaticTable from "../components/tables/StaticTable.astro";
                     roundNumeric={1}
                     rowEmphasis={[1]}
                 />
-                <!-- <CuadroR2 tableData = {r2Data} client:only /> -->
-                <!-- <SuperTable client:only /> -->
+                <!-- <CuadroR2 tableData = {r2Data} client:only="react" /> -->
+                <!-- <SuperTable client:only="react" /> -->
             </div>
         </TabsContent>
     </section>

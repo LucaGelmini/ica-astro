@@ -1,6 +1,12 @@
 %let p_anio_comu = 2022;
 %let p_anio=2022;
-%let p_mes_comu = 11; 
+%let p_mes_comu = 11;
+
+filename entrada1 "/srv/sas/secex/home/comunicado/tablas/PAIS.xlsx";
+PROC IMPORT 
+datafile = entrada1
+OUT=work.pais DBMS=XLSX REPLACE;
+
 
 proc sql;
 create table work.socios_impo1 as
@@ -25,7 +31,7 @@ from secexh.ce_tm3a a
 left join secex.ce_pais c
 	on (a.porg = c.ccod_pais)
 
-where a.fech_aa between '21' and '22' ) b
+where a.fech_aa >= '21' ) b
 
 group by
 b.fech_aaaa,
@@ -40,12 +46,12 @@ select
 a.fech_aaaa as anio,
 a.fech_mm as mes,
 a.pdest_final as pais_cod,
-b.cdescri as pais_descri,
+b.nombre_corto as pais_descri,
 a.cif
 
 from work.socios_impo1 a
 
-left join secex.ce_pais b
+left join work.pais b
 	on (a.pdest_final=b.ccod_pais)
 
 ;quit;
@@ -107,13 +113,13 @@ select
 a.fech_aaaa as anio,
 a.fech_mm as mes,
 a.pdest_final as pais_cod,
-b.cdescri as pais_descri,
+b.nombre_corto as pais_descri,
 a.fob
 
 
 
 from work.socios_expo2 a
-left join secex.ce_pais b
+left join work.pais b
 	on (a.pdest_final=b.ccod_pais)
 ;quit;
 

@@ -76,7 +76,7 @@ def genera_tabla_presentable_acumulado(df_acumulado, comercio):
     return socios_sas_acumulado_presentable
     
 #IMPORTACIONES
-socios_sas_impo = pd.read_csv("./src/wrangling py/data/socios_impo.csv", sep=";")
+socios_sas_impo = pd.read_csv("./src/wrangling-py/data/socios_impo.csv", sep=";")
 socios_sas_impo.cif = socios_sas_impo.cif/1000000
 
 #Agregamos continentes y capitalizamos los países
@@ -94,7 +94,7 @@ socios_sas_impo_mensual_presentable = genera_tabla_presentable_mensual(socios_sa
 socios_sas_impo_acumulado_presentable = genera_tabla_presentable_acumulado(socios_sas_impo_acumulado, "impo")
 
 #EXPORTACIONES
-socios_sas_expo = pd.read_csv("./src/wrangling py/data/socios_expo.csv", sep=";")
+socios_sas_expo = pd.read_csv("./src/wrangling-py/data/socios_expo.csv", sep=";")
 socios_sas_expo.fob = socios_sas_expo.fob/1000000
 
 #Agregamos continentes y capitalizamos los países
@@ -168,7 +168,7 @@ def plot_sunburst_socios(df_impo, acumulado:bool):
             colorscale='Sunsetdark',
             # cmid=average_score
             ),
-        hovertemplate='<b>%{label} </b> <br> CIF: $%{value}<br> Proporcion: %{color:.2%}', #Me jode la proporcion, sí o sí entra por color
+        hovertemplate='<b>%{label} </b> <br> CIF: $%{value:,.2f}<br> Proporcion: %{color:.2%}', #Me jode la proporcion, sí o sí entra por color
         name='',
         maxdepth=2
         ))
@@ -180,7 +180,6 @@ def plot_sunburst_socios(df_impo, acumulado:bool):
                     ) 
     
     return fig
-
 # Exportaciones
 
 tablas_socios = [
