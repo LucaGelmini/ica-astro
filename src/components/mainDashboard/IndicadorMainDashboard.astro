@@ -1,0 +1,40 @@
+---
+import ArrowDown from "../../svg/ArrowDown.astro";
+import ArrowUp from "../../svg/ArrowUp.astro";
+
+export interface Props {
+    data: {
+        amount: number;
+        variation?: number;
+        isBalance?: boolean;
+    };
+    className: string | Array<string>;
+}
+
+const {
+    data: { amount, variation, isBalance = false },
+    className,
+} = Astro.props;
+---
+
+<div class:list={className}>
+    <h4 class="font-semibold"><slot /></h4>
+    <div class="font-semibold">
+        <p class="text-lg text-center">{amount}</p>
+        <p class="text-sm text-center">millones de dólares</p>
+    </div>
+    {
+        variation && (
+            <div class="px-2 flex justify-center">
+                <span>
+                    {variation < 0 ? (
+                        <ArrowDown className={"h-6"} />
+                    ) : (
+                        <ArrowUp className={"h-6"} />
+                    )}
+                </span>
+                <p>{String(variation).replace(".", ",")}%</p>
+            </div>
+        )
+    }
+</div>
