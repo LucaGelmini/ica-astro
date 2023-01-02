@@ -3,14 +3,15 @@ import pandas as pd
 import plotly.express as px
 import plotly.graph_objects as go
 import locale
+from modules.config.config import DIR
 
 # %%
 # Por las dudas lo hago con las tres series: original, desestacionalizada y tendencia-ciclo
 # Primero la tabla que se vería en la publicación
-desest_tabla_expo = pd.read_excel("./src/wrangling py/data/ICA_esqueleto.xlsx",sheet_name="c9",header=3)[3:].reset_index(drop=True)
-desest_tabla_impo = pd.read_excel("./src/wrangling py/data/ICA_esqueleto.xlsx",sheet_name="c10",header=3)[4:].reset_index(drop=True)
-df_plot_desest_expo = pd.read_excel("./src/wrangling py/data/ICA_esqueleto.xlsx",sheet_name="dato graf des x")
-df_plot_desest_impo = pd.read_excel("./src/wrangling py/data/ICA_esqueleto.xlsx",sheet_name="dato graf des m")
+desest_tabla_expo = pd.read_excel(F"{DIR}ICA_esqueleto.xlsx",sheet_name="c9",header=3)[3:].reset_index(drop=True)
+desest_tabla_impo = pd.read_excel(F"{DIR}ICA_esqueleto.xlsx",sheet_name="c10",header=3)[4:].reset_index(drop=True)
+df_plot_desest_expo = pd.read_excel(F"{DIR}ICA_esqueleto.xlsx",sheet_name="dato graf des x")
+df_plot_desest_impo = pd.read_excel(F"{DIR}ICA_esqueleto.xlsx",sheet_name="dato graf des m")
 df_plot_desest_expo = df_plot_desest_expo.set_index("fecha")
 df_plot_desest_impo = df_plot_desest_impo.set_index("fecha")
 
@@ -37,7 +38,7 @@ def plot_desestacionalizado(df):
                             name = "Tendencia-Ciclo", mode = "lines", line_width = 2.5,hovertemplate="$%{y:,.0f}"))
     plot_desestacionalizado.update_xaxes(nticks = 10)
     plot_desestacionalizado.update_yaxes(tickformat = ",")
-    plot_desestacionalizado.update_layout(separators = ",.",template = None, hovermode = "x unified",
+    plot_desestacionalizado.update_layout(separators = ",.",template = None, hovermode = "x unified", title_text="",
                     font_family = "georgia",
                     legend = dict(
                         yanchor="top", orientation = "h",

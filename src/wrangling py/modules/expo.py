@@ -2,11 +2,11 @@
 import pandas as pd
 import plotly.express as px
 import plotly.io as io
+from modules.config.config import DIR
 
 # %%
-df_grafico1_tabla = pd.read_excel("./src/wrangling py/data/ICA_esqueleto.xlsx",
+df_grafico1_tabla = pd.read_excel(f"{DIR}ICA_esqueleto.xlsx",
                                   sheet_name="graf1 expo.rubros.", skipfooter=1, skiprows=1)
-df_grafico1_tabla
 
 # %%
 df_grafico1 = df_grafico1_tabla[["Rubros", "Octubre 2021*", "Octubre 2022e"]].melt(
@@ -30,12 +30,12 @@ plot_expo_rubros.data[
 # %%
 columnas = ["Rubros", "Octubre 2022e", "Octubre 2021*", "Octubre Variación porcentual",
             "Diez meses 2022e", "Diez meses 2021*", "Diez meses Variación porcentual"]
-cuadro5 = pd.read_excel("./src/wrangling py/data/ICA_esqueleto.xlsx",
+cuadro5 = pd.read_excel(f"{DIR}ICA_esqueleto.xlsx",
                         sheet_name="c5", skipfooter=0, skiprows=4, names=columnas)
 cuadro5.head()
 
 # %%
-cuadro6 = pd.read_excel("./src/wrangling py/data/ICA_esqueleto.xlsx",
+cuadro6 = pd.read_excel(f"{DIR}ICA_esqueleto.xlsx",
                         sheet_name="c6", skipfooter=0, skiprows=3)[1:]
 cuadro6 = cuadro6.fillna("-")
 cuadro6.head()
