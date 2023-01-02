@@ -1,18 +1,18 @@
 ---
 import Layout from "../layouts/Layout.astro";
-import Grafico from "../components/grafico";
+import Grafico from "../components/Grafico";
 import Tabs from "../layouts/Tabs.astro";
 import Tab from "../components/tab.astro";
 import TabsContent from "../layouts/TabsContent.astro";
 import Collapsible from "../layouts/Collapsible.astro";
 
-import plotUsosData from "../data/plots/plot_expo_rubros.json"
-import tablaRubrosData from "../data/cuadros/df_grafico1_tabla.json"
-import {Content as TextoExpo} from "../data/textos/expo_1.md"
+import plotUsosData from "../data/plots/plot_expo_rubros.json";
+import dataDesestExpo from "../data/plots/plot_desestacionalizado_expo.json";
+import tablaRubrosData from "../data/cuadros/df_grafico1_tabla.json";
+import tablaDesestData from "../data/cuadros/tabla desestacionalizada.json";
+import { Content as TextoExpo } from "../data/textos/expo_1.md";
 import StaticTable from "../components/tables/StaticTable.astro";
-
 ---
-
 
 <Layout title="Exportaciones">
     <section>
@@ -20,15 +20,30 @@ import StaticTable from "../components/tables/StaticTable.astro";
             <TextoExpo />
         </Collapsible>
         <Tabs id="rubros">
-            <Tab contentRef="graficoRubros" defaultTab={true}>Exportación por rubros económicos</Tab>
-            <Tab contentRef="cuadroRubros">Cuadro</Tab>
+            <Tab contentRef="graficoRubros" defaultTab={true}
+                >Exportación por rubros económicos</Tab
+            >
+            <Tab contentRef="serieDes">Serie desestacionalizada</Tab>
         </Tabs>
         <TabsContent tabsId="rubros">
             <div id="graficoRubros" class="w-full">
-                <Grafico  plotData={plotUsosData}  client:only/>
+                <Grafico plotData={plotUsosData} client:only="react" />
+                <StaticTable
+                    tableData={tablaRubrosData}
+                    tableId="cuadroImpoUsos"
+                    roundNumeric={1}
+                />
             </div>
-            <div class="hidden w-full" id="cuadroRubros">
-                <StaticTable tableData={tablaRubrosData} tableId="cuadroImpoUsos" roundNumeric={1}/>
+            <div class="hidden w-full" id="serieDes">
+                <Grafico plotData={dataDesestExpo} client:only="react" />
+                <div class="w-full overflow-x-auto">
+                    <StaticTable
+                        tableData={tablaDesestData}
+                        tableId="cuadroImpoDesest"
+                        roundNumeric={1}
+                        hideIndex={false}
+                    />
+                </div>
             </div>
         </TabsContent>
     </section>

@@ -5,6 +5,7 @@ export interface Props {
 }
 
 const { title, mainHeader=title } = Astro.props;
+import Footer from '../components/Footer.astro';
 import Header from '../components/Header.astro';
 import Main from './Main.astro';
 ---
@@ -23,7 +24,7 @@ import Main from './Main.astro';
             <h2 class="text-4xl font-semibold my-4">{mainHeader}</h2>
             <slot />
         </Main>
-        <footer class="bg-gray-500 h-48 mt-10"></footer>
     </body>
+    <Footer />
 </html>
 

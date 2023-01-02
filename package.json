@@ -9,7 +9,8 @@
         "build": "astro build",
         "preview": "astro preview",
         "astro": "astro",
-        "wrangling": "wrangling.sh"
+        "wrangling": "wrangling.sh",
+        "wrangling-linux": "bash ./wrangling.sh"
     },
     "dependencies": {
         "@astrojs/react": "^1.2.2",

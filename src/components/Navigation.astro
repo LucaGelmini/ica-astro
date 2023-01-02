@@ -1,26 +1,32 @@
 ---
 export interface Props {
     pages: object;
-};
+}
 
-const {pages} = Astro.props;
+const { pages } = Astro.props;
 ---
 
-<div class="hidden lg:flex justify-center h-full" id="nav-container">
-    {Object.keys(pages)
-        .map(page=><a href={pages[page]} class="h-full px-2 flex items-center hover:bg-gray-200">{page}</a>)}
+<div class="hidden md:flex justify-center h-full" id="nav-container">
+    {
+        Object.keys(pages).map((page) => (
+            <a
+                href={pages[page]}
+                class="h-full px-2 flex items-center hover:bg-gray-200"
+            >
+                {page}
+            </a>
+        ))
+    }
 </div>
 
-
 <script is:inline>
-
-    const anchors = document.querySelectorAll('#nav-container a');
-    anchors.forEach(anchor=>{
+    const anchors = document.querySelectorAll("#nav-container a");
+    anchors.forEach((anchor) => {
         const href = anchor.attributes.href.value;
-        if (href === window.location.pathname){
+        if (href === window.location.pathname) {
             anchor.classList.add("bg-gray-300");
-        }else{
-            anchor.classList.remove("bg-gray-300")
+        } else {
+            anchor.classList.remove("bg-gray-300");
         }
-    })
+    });
 </script>
