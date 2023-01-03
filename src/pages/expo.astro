@@ -27,7 +27,7 @@ import StaticTable from "../components/tables/StaticTable.astro";
         </Tabs>
         <TabsContent tabsId="rubros">
             <div id="graficoRubros" class="w-full">
-                <Grafico plotData={plotUsosData} client:only="react" />
+                <Grafico plotAndTitleData={plotUsosData} client:only="react" />
                 <StaticTable
                     tableData={tablaRubrosData}
                     tableId="cuadroImpoUsos"
@@ -35,7 +35,10 @@ import StaticTable from "../components/tables/StaticTable.astro";
                 />
             </div>
             <div class="hidden w-full" id="serieDes">
-                <Grafico plotData={dataDesestExpo} client:only="react" />
+                <Grafico
+                    plotAndTitleData={dataDesestExpo}
+                    client:only="react"
+                />
                 <div class="w-full overflow-x-auto">
                     <StaticTable
                         tableData={tablaDesestData}

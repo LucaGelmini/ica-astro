@@ -35,7 +35,7 @@ import MainDashborad from "../components/mainDashboard/MainDashborad.astro";
 
         <TabsContent tabsId="tabsSaldo">
             <div id="graficoSaldo" class="w-full">
-                <Grafico plotData={data} client:only="react" />
+                <Grafico plotAndTitleData={data} client:only="react" />
             </div>
             <div id="tabla1" class="hidden w-full overflow-x-auto">
                 <StaticTable

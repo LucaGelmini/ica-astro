@@ -2,7 +2,9 @@ import { useLayoutEffect, useRef, useState } from "react";
 import { useInView } from "react-intersection-observer";
 import Plot from "react-plotly.js";
 
-const Grafico = ({ plotData, divClassName = "w-full h-[500px]" }) => {
+const Grafico = ({ plotAndTitleData, divClassName = "w-full h-[500px]" }) => {
+    const {title, plot:plotData} = plotAndTitleData;
+
     const [width, setWidth] = useState(0);
     const [height, setHeight] = useState(0);
 
@@ -16,7 +18,9 @@ const Grafico = ({ plotData, divClassName = "w-full h-[500px]" }) => {
     }, [inView]);
 
     return (
+
         <div ref={ref} className={divClassName}>
+            {/* {title&&<h3 className=" font-semibold">{title}</h3>} */}
             <Plot
                 data={plotData.data}
                 layout={{
