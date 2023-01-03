@@ -1,30 +1,8 @@
 import pandas as pd
 import plotly.graph_objects as go
+from modules.config.config import DIC_MESES, DIR, CONTINENTES_DICT
 
-# Funciones y diccionarios útiles
 
-CONTINENTES_DICT = {
-    '1':'África',
-    '2': "América",
-    '3': "Asia",
-    "4": "Europa",
-    "5": "Oceanía",
-    "9": "Indeterminado",
-}
-DIC_MESES = {
-    1:"enero",
-    2:"febrero",
-    3:"marzo",
-    4:"abril",
-    5:"mayo",
-    6:"junio",
-    7:"julio",
-    8:"agosto",
-    9:"septiembre",
-    10:"octubre",
-    11: "noviembre",
-    12: "diciembre"
-}
 def genera_tablas_con_continentes(df):
     df["continente"] = df.pais_cod.apply(lambda x: CONTINENTES_DICT[str(x)[0]])
     df.pais_descri = df.pais_descri.apply(lambda x: x.capitalize())
@@ -76,7 +54,7 @@ def genera_tabla_presentable_acumulado(df_acumulado, comercio):
     return socios_sas_acumulado_presentable
     
 #IMPORTACIONES
-socios_sas_impo = pd.read_csv("./src/wrangling-py/data/socios_impo.csv", sep=";")
+socios_sas_impo = pd.read_csv(f"{DIR}socios_impo.csv", sep=";")
 socios_sas_impo.cif = socios_sas_impo.cif/1000000
 
 #Agregamos continentes y capitalizamos los países
@@ -94,7 +72,7 @@ socios_sas_impo_mensual_presentable = genera_tabla_presentable_mensual(socios_sa
 socios_sas_impo_acumulado_presentable = genera_tabla_presentable_acumulado(socios_sas_impo_acumulado, "impo")
 
 #EXPORTACIONES
-socios_sas_expo = pd.read_csv("./src/wrangling-py/data/socios_expo.csv", sep=";")
+socios_sas_expo = pd.read_csv(f"{DIR}socios_expo.csv", sep=";")
 socios_sas_expo.fob = socios_sas_expo.fob/1000000
 
 #Agregamos continentes y capitalizamos los países
@@ -109,10 +87,11 @@ socios_sas_expo_acumulado_presentable = genera_tabla_presentable_acumulado(socio
 
 # GRÁFICOS
 
-def plot_anillo_socios(df_presentable, acumulado:bool, ultimo_mes = ultimo_mes, ultimo_anio = ultimo_anio):
-    fecha = f"Acumulado hasta {DIC_MESES[ultimo_mes]} de {ultimo_anio}" if acumulado else "Mes de noviembre"
-    total = "{:,d}".format(int(round(df_presentable['Millones de dólares'].sum(),0))).replace(",",".")+"M"
-    fig = go.Figure(data=[go.Pie(labels=df_presentable.País, values=df_presentable['Millones de dólares'], hole=.5)])
+def plot_anillo_socios(acumulado:bool):
+    df = socios_sas_expo_acumulado_presentable if acumulado else socios_sas_expo_mensual_presentable
+    fecha = f"Acumulado hasta {DIC_MESES[ultimo_mes]} de {ultimo_anio}" if acumulado else f"Mes de {DIC_MESES[ultimo_mes]}"
+    total = "{:,d}".format(int(round(df['Millones de dólares'].sum(),0))).replace(",",".")+"M"
+    fig = go.Figure(data=[go.Pie(labels=df.País, values=df['Millones de dólares'], hole=.5)])
     fig.update_layout(title_text = f"Principales países de exportación:<br>{fecha}", template = None, font_family = "verdana",
                     margin = dict(t=70, l=10, r=10, b=30), separators = ",.",
                     annotations = [dict(text = f"{total}", showarrow = False, font_size = 20)],
@@ -154,9 +133,10 @@ def build_hierarchical_dataframe(df, levels, value_column, color_columns=None):
     # df_all_trees =pd.concat([df_all_trees,total], ignore_index=True)
     return df_all_trees
 
-def plot_sunburst_socios(df_impo, acumulado:bool):
+def plot_sunburst_socios(acumulado:bool):
+    df = socios_sas_impo_acumulado if acumulado else socios_sas_impo_mensual
     fecha = "acumulado hasta noviembre" if acumulado else "mes de noviembre"
-    socios_sas_mensual_tree = build_hierarchical_dataframe(df=df_impo, levels=["pais_descri", "continente"],value_column="cif", color_columns = "cif")
+    socios_sas_mensual_tree = build_hierarchical_dataframe(df=df, levels=["pais_descri", "continente"],value_column="cif", color_columns = "cif")
 
     fig = go.Figure(go.Sunburst(
         labels=socios_sas_mensual_tree['id'],
@@ -180,6 +160,7 @@ def plot_sunburst_socios(df_impo, acumulado:bool):
                     ) 
     
     return fig
+
 # Exportaciones
 
 tablas_socios = [
@@ -189,7 +170,7 @@ socios_sas_expo_mensual_presentable,
 socios_sas_expo_acumulado_presentable,]
 
 plots_socios = [
-plot_sunburst_socios(socios_sas_impo_mensual, acumulado=False),
-plot_sunburst_socios(socios_sas_impo_acumulado, acumulado=True),
-plot_anillo_socios(socios_sas_expo_mensual_presentable,  acumulado=False),
-plot_anillo_socios(socios_sas_expo_acumulado_presentable,acumulado=True)]
+plot_sunburst_socios(acumulado=False),
+plot_sunburst_socios(acumulado=True),
+plot_anillo_socios(acumulado=False),
+plot_anillo_socios(acumulado=True)]
