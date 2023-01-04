@@ -189,5 +189,27 @@ def plot_barras_usos_rubros(importacion:bool, acumulado:bool):
               x=0.41))
        return fig
    
+def genera_datos_barra_index():
+    prueba_mensual = df[(df.mes == ultimo_mes)].reset_index(drop=True).copy()
+    prueba_mensual = prueba_mensual[["comercio","anio","valor"]].groupby(["comercio","anio"],as_index=False).sum()
+    prueba_mensual["variacion"] = prueba_mensual.groupby(['comercio'])["valor"].pct_change(1,fill_method=None)
+    prueba_mensual = prueba_mensual[prueba_mensual.anio == ultimo_anio].reset_index(drop=True)
+    prueba_mensual["proporcion"]=prueba_mensual.valor/prueba_mensual.valor.sum()
+
+    prueba_acumulada = df.copy()
+    prueba_acumulada = prueba_acumulada[["comercio","anio","valor"]].groupby(["comercio","anio"],as_index=False).sum()
+    prueba_acumulada["variacion"] = prueba_acumulada.groupby(['comercio'])["valor"].pct_change(1,fill_method=None)
+    prueba_acumulada = prueba_acumulada[prueba_acumulada.anio == ultimo_anio].reset_index(drop=True)
+    prueba_acumulada["proporcion"]=prueba_acumulada.valor/prueba_acumulada.valor.sum()
+
+    return {
+        "bar": {"mensual": {"xPercentage":prueba_mensual.proporcion[0], "mPercentage": prueba_mensual.proporcion[1]},
+                "acumulada": {"xPercentage":prueba_acumulada.proporcion[0], "mPercentage": prueba_acumulada.proporcion[1]},
+                },
+        "boxes": {"mensual": {"xMonto":prueba_mensual.valor[0], "mMonto": prueba_mensual.valor[1],"xVar":prueba_mensual.variacion[0], "mVar": prueba_mensual.variacion[1]},
+                "acumulada": {"xMonto":prueba_acumulada.valor[0], "mMonto": prueba_acumulada.valor[1],"xVar":prueba_acumulada.variacion[0], "mVar": prueba_acumulada.variacion[1]},
+                }
+    }
+   
 
 

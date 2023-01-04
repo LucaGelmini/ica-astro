@@ -2,6 +2,7 @@
 DIR = "./src/wrangling-py/data/"
 DIR_PLOTS = "./src/data/plots/"
 DIR_CUADROS = "./src/data/cuadros/"
+DIR_DASHBOARS = "./src/data/dashboards/"
 
 #Diccionarios útiles
 DIC_MESES = {
@@ -27,4 +28,6 @@ CONTINENTES_DICT = {
     "5": "Oceanía",
     "9": "Indeterminado",
 }
+
+
 
