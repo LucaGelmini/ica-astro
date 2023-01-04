@@ -3,6 +3,7 @@ import { useInView } from "react-intersection-observer";
 import Plot from "react-plotly.js";
 
 const Grafico = ({ plotData, divClassName = "w-full h-[500px]" }) => {
+
     const [width, setWidth] = useState(0);
     const [height, setHeight] = useState(0);
 
@@ -10,19 +11,22 @@ const Grafico = ({ plotData, divClassName = "w-full h-[500px]" }) => {
 
     useLayoutEffect(() => {
         if (inView) {
-            setWidth(entry.target.offsetWidth);
-            setHeight(entry.target.offsetHeight);
+            const t = entry.target as HTMLElement;
+            setWidth(t.offsetWidth);
+            setHeight(t.offsetHeight);
         }
     }, [inView]);
 
     return (
+
         <div ref={ref} className={divClassName}>
             <Plot
                 data={plotData.data}
                 layout={{
                     width,
                     height,
-                    margin: { l: 50, r: 0, t: 0, b: 10 },
+                    margin: { l: 40, r: 0, t: 0, b: 10 },
+                    pad:{l: 0, r: 0, t: 0, b: 0},
                     ...plotData.layout,
                 }}
                 config={{

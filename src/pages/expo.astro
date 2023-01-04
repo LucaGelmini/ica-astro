@@ -15,7 +15,7 @@ import StaticTable from "../components/tables/StaticTable.astro";
 ---
 
 <Layout title="Exportaciones">
-    <section>
+    <section class="w-full" mb-4>
         <Collapsible sumaryText="Sobre las exportaciones">
             <TextoExpo />
         </Collapsible>
@@ -35,7 +35,8 @@ import StaticTable from "../components/tables/StaticTable.astro";
                 />
             </div>
             <div class="hidden w-full" id="serieDes">
-                <Grafico plotData={dataDesestExpo} client:only="react" />
+                <h3 class="font-semibold text-lg">{dataDesestExpo.title}</h3>
+                <Grafico plotData={dataDesestExpo.plot} client:only="react" />
                 <div class="w-full overflow-x-auto">
                     <StaticTable
                         tableData={tablaDesestData}

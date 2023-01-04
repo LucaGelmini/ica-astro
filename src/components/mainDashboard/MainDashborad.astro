@@ -1,25 +1,69 @@
 ---
 import Grafico from "../Grafico";
-import dataSunburstImpoMes from "../../data/plots/sunburst_socios_impo_mensual.json";
+import plotAndTitle from "../../data/plots/sunburst_rubros_usos_mensual.json";
+import IndicadorMainDashboard from "./IndicadorMainDashboard.astro";
+
+const dummyBoxesData = {
+    x: { amount: 7089, variation: 14.5 },
+    m: { amount: 5750, variation: -0.3 },
+};
+
+const expoPercentage =
+    (dummyBoxesData.x.amount /
+        (dummyBoxesData.x.amount + dummyBoxesData.m.amount)) *
+    100;
+const impoPercentage =
+    (dummyBoxesData.m.amount /
+        (dummyBoxesData.x.amount + dummyBoxesData.m.amount)) *
+    100;
 ---
 
-<div class="w-full h-1/6 flex flex-col items-center">
-    <div>
+<div
+    class="w-full md:h-screen py-8 -my-6 overflow-hidden grid grid-rows-7 grid-cols-1 md:grid-rows-5"
+>
+    <div class="row-span-4 w-full md:row-span-4">
+        <h3 class="font-semibold text-lg text-center">{plotAndTitle.title}</h3>
+
         <Grafico
-            plotData={dataSunburstImpoMes}
-            divClassName={"w-full h-[300px]"}
+            plotData={plotAndTitle.plot}
+            divClassName={"w-full h-3/4 mx-auto"}
             client:only
         />
-    </div>
-    <div class="w-2/3 flex">
-        <div class="h-[10px] w-2/3 bg-orange-500"></div>
-        <div class="h-[10px] w-1/3 bg-violet-500"></div>
+
+        <div class="w-full flex">
+            <div class:list={`w-expo h-min text-center`}>
+                <p class="md:text-lg">Exportaciones</p>
+            </div>
+            <div class:list={`w-impo h-min text-center`}>
+                <p class="md:text-lg">Importaciones</p>
+            </div>
+        </div>
+        <div class="w-full flex">
+            <div class:list={`w-expo bg-expo h-min text-center`}>
+                <p class="texg-lg font-semibold md:text-lg">
+                    {Number(expoPercentage.toFixed(1)).toLocaleString("es-AR")}%
+                </p>
+            </div>
+            <div class:list={`w-impo bg-impo h-min text-center`}>
+                <p class="texg-lg font-semibold md:text-lg">
+                    {Number(impoPercentage.toFixed(1)).toLocaleString("es-AR")}%
+                </p>
+            </div>
+        </div>
     </div>
     <div
-        class="w-full flex flex-col justify-around items-center my-5 md:flex-row"
+        class="w-full row-span-3 flex flex-col justify-around items-center md:flex-row md:items-stretch md:row-span-1"
     >
-        <div class="w-1/4 rounded-md bg-orange-500 shadow-sm">Expo</div>
-        <div class="w-1/4 rounded-md bg-indigo-500 shadow-sm">Saldo</div>
-        <div class="w-1/4 rounded-md bg-violet-500 shadow-sm">Impo</div>
+        <IndicadorMainDashboard data={dummyBoxesData.x} className="bg-expo">
+            Exportaciones
+        </IndicadorMainDashboard>
+        <IndicadorMainDashboard
+            data={{ amount: dummyBoxesData.x.amount - dummyBoxesData.m.amount }}
+            className={"bg-balance"}>Saldo</IndicadorMainDashboard
+        >
+
+        <IndicadorMainDashboard data={dummyBoxesData.m} className={"bg-impo"}>
+            Importaciones
+        </IndicadorMainDashboard>
     </div>
 </div>

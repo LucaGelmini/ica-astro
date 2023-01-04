@@ -7,8 +7,11 @@ const { tabsId } = Astro.props;
 ---
 
 <tab-id-data data-id={tabsId}></tab-id-data>
-<div id={`${tabsId}-contents`} class="flex justify-center mt-2">
-    <slot/>
+<div
+    id={`${tabsId}-contents`}
+    class="flex justify-center mt-2 w-full overflow-hidden"
+>
+    <slot />
 </div>
 
 <script>

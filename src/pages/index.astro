@@ -5,7 +5,7 @@ import Tabs from "../layouts/Tabs.astro";
 import Tab from "../components/tab.astro";
 import TabsContent from "../layouts/TabsContent.astro";
 
-import data from "../data/plots/plot_agregado.json";
+import plotAgregado from "../data/plots/plot_agregado.json";
 import r2Data from "../data/cuadros/r2_df.json";
 import c2Expo from "../data/cuadros/c2_expo.json";
 import c2Impo from "../data/cuadros/c2_impo.json";
@@ -19,10 +19,10 @@ import MainDashborad from "../components/mainDashboard/MainDashborad.astro";
 ---
 
 <Layout title="Intercambio comercial Argentino" mainHeader="Síntesis">
-    <section>
+    <section class="w-full" mb-4>
         <MainDashborad />
     </section>
-    <section>
+    <section class="w-full" mb-4>
         <Collapsible sumaryText="Síntesis de los resultados">
             <Texto1 />
         </Collapsible>
@@ -35,7 +35,8 @@ import MainDashborad from "../components/mainDashboard/MainDashborad.astro";
 
         <TabsContent tabsId="tabsSaldo">
             <div id="graficoSaldo" class="w-full">
-                <Grafico plotData={data} client:only="react" />
+                <h3 class="font-semibold text-lg">{plotAgregado.title}</h3>
+                <Grafico plotData={plotAgregado.plot} client:only="react" />
             </div>
             <div id="tabla1" class="hidden w-full overflow-x-auto">
                 <StaticTable
@@ -51,7 +52,7 @@ import MainDashborad from "../components/mainDashboard/MainDashborad.astro";
             </div>
         </TabsContent>
     </section>
-    <section class="mt-10">
+    <section class="w-full mb-4">
         <h3 class="text-3xl font-semibold my-4">
             Índices de valores, precios y cantidades y efecto de los términos
             del intercambio de octubre de 2022
