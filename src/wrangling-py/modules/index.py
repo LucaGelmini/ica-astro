@@ -49,46 +49,46 @@ balanza.index = pd.to_datetime(
 balanza = balanza["2011":]
 
 # %%
-new_date = [d.strftime('%b %Y').replace(".", "").capitalize()
-            for d in balanza.index]
+new_date = [d.strftime('%b %Y').replace(".","").capitalize() for d in balanza.index]
 x = new_date
 plot_agregado = go.Figure()
 plot_agregado.add_trace(
     go.Scatter(
-        x=new_date,
-        y=balanza.Exportaciones/1000000,
-        name="Exportaciones",
-        hovertemplate="$%{y:,.0f}"
+        x = new_date,
+        y = balanza.Exportaciones/1000000,
+        name = "Exportaciones",
+        hovertemplate="$%{y:,.0f}",
+        line_width = 2.5
     ))
-
+    
 plot_agregado.add_trace(
     go.Scatter(
-        x=new_date,
-        y=balanza.Importaciones/1000000,
-        name="Importaciones",
-        hovertemplate="$%{y:,.0f}"
-    )
+        x = new_date,
+        y = balanza.Importaciones/1000000,
+        name = "Importaciones",
+        hovertemplate="$%{y:,.0f}",
+        line_width = 2.5
+    )    
 )
 plot_agregado.add_trace(
     go.Bar(
-        x=new_date,
-        y=balanza['Saldo comercial']/1000000,
-        name="Saldo",
+        x = new_date,
+        y = balanza['Saldo comercial']/1000000,
+        name = "Saldo",
         hovertemplate="$%{y:,.0f}"
-    )
+    )    
 )
-plot_agregado.update_layout(
-    title_text = "",
-    template="none", separators=",.", font_family="georgia")
-plot_agregado.update_yaxes(tickformat=",",
-                           dtick=1000)
+plot_agregado.update_layout(template = "none",separators=",.", font_family="verdana")
+plot_agregado.update_yaxes(tickformat = ",",dtick=1000, title_text = "Millones de USD")
 plot_agregado.update_xaxes(rangeslider=dict(
-    visible=True,
-), nticks=10
-)
-plot_agregado.update_layout(hovermode="x unified", legend=dict(
-    yanchor="top", orientation="h",
-    y=1.16,
-    xanchor="left",
-    x=0.34))
+            visible=True,
+        ),nticks=10
+                 )
+plot_agregado.update_layout(hovermode="x unified", 
+                            # margin ={'b': 2},
+                            legend=dict(
+       yanchor="top", orientation = "h",
+       y=1.16,
+       xanchor="left",
+       x=0.34))
 plot_agregado.update_xaxes(tickangle=90)

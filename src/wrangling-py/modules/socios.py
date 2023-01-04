@@ -92,7 +92,7 @@ def plot_anillo_socios(acumulado:bool):
     fecha = f"Acumulado hasta {DIC_MESES[ultimo_mes]} de {ultimo_anio}" if acumulado else f"Mes de {DIC_MESES[ultimo_mes]}"
     total = "{:,d}".format(int(round(df['Millones de dólares'].sum(),0))).replace(",",".")+"M"
     fig = go.Figure(data=[go.Pie(labels=df.País, values=df['Millones de dólares'], hole=.5)])
-    fig.update_layout(title_text = f"Principales países de exportación:<br>{fecha}", template = None, font_family = "verdana",
+    fig.update_layout(title_text = f"Principales países de exportación: {fecha}", template = None, font_family = "verdana",
                     margin = dict(t=70, l=10, r=10, b=30), separators = ",.",
                     annotations = [dict(text = f"{total}", showarrow = False, font_size = 20)],
                     showlegend= False,
@@ -152,7 +152,7 @@ def plot_sunburst_socios(acumulado:bool):
         name='',
         maxdepth=2
         ))
-    fig.update_layout(title_text = f"Principales socios comerciales {fecha}: <br>Importaciones", template = None,
+    fig.update_layout(title_text = f"Principales países de importación: {fecha}", template = None,
                     margin = {"t":70, "b":20, "l":10, "r":10},separators = ",." ,
                     #   uniformtext=dict(minsize=10, mode='hide'),
                     font_family = "verdana",

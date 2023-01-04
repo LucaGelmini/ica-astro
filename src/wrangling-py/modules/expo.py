@@ -13,8 +13,8 @@ df_grafico1 = df_grafico1_tabla[["Rubros", "Octubre 2021*", "Octubre 2022e"]].me
     id_vars="Rubros", value_name="Dólares", var_name="Período")
 plot_expo_rubros = px.histogram(df_grafico1[df_grafico1.Rubros != "Total"],
                                 x="Rubros", y="Dólares", color="Período", barmode="group", template="none")
-plot_expo_rubros.update_yaxes(tickformat=",", title_text='En millones de USD')
-plot_expo_rubros.update_layout(separators=",.", font_family='georgia', title_text="Exportación por rubros económicos. Octubre de 2022 y octubre de 2021",
+plot_expo_rubros.update_yaxes(tickformat=",", title_text='Millones de USD')
+plot_expo_rubros.update_layout(separators=",.", font_family='verdana', title_text="Exportación por rubros económicos. Octubre de 2022 y octubre de 2021",
                                legend=dict(
                                    yanchor="top", orientation="h",
                                    y=1.07,
