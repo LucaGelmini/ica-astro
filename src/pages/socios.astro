@@ -3,7 +3,7 @@ import Tab from "../components/tab.astro";
 import Layout from "../layouts/Layout.astro";
 import Tabs from "../layouts/Tabs.astro";
 import TabsContent from "../layouts/TabsContent.astro";
-import Grafico from "../components/grafico.jsx";
+import Grafico from "../components/Grafico.jsx";
 
 import dataAnilloExpoAcumulado from "../data/plots/anillo_socios_expo_acumulado.json";
 import dataSunburstImpoAcumulado from "../data/plots/sunburst_socios_impo_acumulado.json";
@@ -12,22 +12,58 @@ import dataSunburstImpoMes from "../data/plots/sunburst_socios_impo_mensual.json
 ---
 
 <Layout title="Socios comerciales" mainHeader="Principales socios comerciales">
-    <section>
+    <section class="w-full" mb-4>
         <Tabs id="tabsSocios">
             <Tab contentRef="mensual" defaultTab={true}>Último mes</Tab>
             <Tab contentRef="acumulado">Acumulado</Tab>
         </Tabs>
         <TabsContent tabsId="tabsSocios">
             <div id="mensual">
-                <div class="grid grid-cols-2">
-                    <Grafico plotData={dataAnilloExpoMes} client:only />
-                    <Grafico plotData={dataSunburstImpoMes} client:only />
+                <div class="grid grid-rows-2 md:grid-rows-1 md:grid-cols-2">
+                    <div>
+                        <h3 class="font-semibold text-lg">
+                            {dataAnilloExpoMes.title}
+                        </h3>
+                        <Grafico
+                            plotData={dataAnilloExpoMes.plot}
+                            divClassName={"w-[300px] h-[300px] mx-auto"}
+                            client:only="react"
+                        />
+                    </div>
+                    <div>
+                        <h3 class="font-semibold text-lg">
+                            {dataSunburstImpoMes.title}
+                        </h3>
+                        <Grafico
+                            divClassName={"w-[300px] h-[300px] mx-auto"}
+                            plotData={dataSunburstImpoMes.plot}
+                            client:only="react"
+                        />
+                    </div>
                 </div>
             </div>
-            <div id="acumulado" class="hidden">
-                <div class="grid grid-cols-2">
-                    <Grafico plotData={dataAnilloExpoAcumulado} client:only />
-                    <Grafico plotData={dataSunburstImpoAcumulado} client:only />
+            <div id="acumulado" class="hidden w-full">
+                <div class="grid grid-rows-2 md:grid-rows-1 md:grid-cols-2">
+                    <div>
+                        <h3 class="font-semibold text-lg">
+                            {dataAnilloExpoAcumulado.title}
+                        </h3>
+                        <Grafico
+                            divClassName={"w-[300px] h-[300px] mx-auto md:w-full"}
+                            plotData={dataAnilloExpoAcumulado.plot}
+                            client:only="react"
+                        />
+                    </div>
+                    <div>
+                        <h3 class="font-semibold text-lg">
+                            {dataSunburstImpoAcumulado.title}
+                        </h3>
+                        <Grafico
+                            divClassName={"w-[300px] h-[300px] mx-auto md:w-full"}
+                            plotData={dataSunburstImpoAcumulado.plot}
+                            client:only="react"
+                        />
+                    </div>
                 </div>
             </div>
         </TabsContent>

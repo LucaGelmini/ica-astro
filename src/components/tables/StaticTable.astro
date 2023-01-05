@@ -6,6 +6,7 @@ export interface Props {
         data: Array<any>;
         schema: {
             fields: Array<{ name: string; type: string }>;
+            primaryKey: Array<string>;
         };
     };
     tableId: string;
@@ -21,7 +22,7 @@ type HeaderRenderData = Array<
 
 let {
     tableData: {
-        schema: { fields },
+        schema: { fields, primaryKey },
         data,
     },
 } = Astro.props;
@@ -49,21 +50,20 @@ const prepareCells = (
 ): Array<object> =>
     tableData.map((row) => {
         for (let col in row) {
-            if (
-                fields.filter((f) => f.name === col)[0].type === "number" &&
-                row[col] !== null
-            ) {
-                //si la columna es tipo numero y es diferente de null
-                if (typeof row[col] === "string" && row[col].includes(","))
-                    break; //si ya la procesaste y tiene ',' break
-                let [integer, decimal] = Number(row[col]) // redondeo y coma
-                    .toFixed(precision)
-                    .split(".");
-                row[col] = decimal !== "0" ? integer + "," + decimal : integer;
+            if (fields.filter((f) => f.name === col)[0].type === "string") {
+                row[col] = String(row[col]);
+            } else {
+                let n = Number(row[col]);
+                n &&
+                    (row[col] = Number(n.toFixed(precision)).toLocaleString(
+                        "es-AR"
+                    ));
             }
         }
         return row;
     });
+
+const isIndex = (colName) => primaryKey.includes(colName);
 
 data = prepareCells(data, roundNumeric);
 
@@ -192,7 +192,8 @@ const parseHeadersFromFields = (
                                         rowEmphasis.includes(i)
                                             ? "font-semibold"
                                             : "",
-                                        colNumber === 0
+                                        colNumber === 0 ||
+                                        isIndex(fields[colNumber])
                                             ? "text-left"
                                             : "text-right",
                                         "px-2",

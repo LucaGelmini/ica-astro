@@ -4,11 +4,12 @@ export interface Props {
     mainHeader?: string;
 }
 
-const { title, mainHeader=title } = Astro.props;
-import Footer from '../components/Footer.astro';
-import Header from '../components/Header.astro';
-import Main from './Main.astro';
+const { title, mainHeader = title } = Astro.props;
+import Footer from "../components/Footer.astro";
+import Header from "../components/Header.astro";
+import Main from "./Main.astro";
 ---
+
 <!DOCTYPE html>
 <html lang="es" class="font-sans bg-white">
     <head>
@@ -18,13 +19,14 @@ import Main from './Main.astro';
         <meta name="generator" content={Astro.generator} />
         <title>{title}</title>
     </head>
-    <Header/>
-    <body>
+    <Header />
+    <body class="w-screen">
         <Main>
-            <h2 class="text-4xl font-semibold my-4">{mainHeader}</h2>
+            <h2 class="text-4xl font-semibold my-4 self-start">
+                {mainHeader}
+            </h2>
             <slot />
         </Main>
     </body>
     <Footer />
 </html>
-
