@@ -1,9 +1,13 @@
-import { useLayoutEffect, useRef, useState } from "react";
+import { useLayoutEffect, lazy, useState, Suspense } from "react";
 import { useInView } from "react-intersection-observer";
-import Plot from "react-plotly.js";
+const Plot = lazy(() => import("react-plotly.js"));
 
-const Grafico = ({ plotData, divClassName = "w-full h-[500px]" }) => {
+type Props = {
+    plotData: { data: Array<object>; layout: Array<object> };
+    divClassName: string;
+};
 
+const Grafico = ({ plotData, divClassName = "w-full h-[500px]" }: Props) => {
     const [width, setWidth] = useState(0);
     const [height, setHeight] = useState(0);
 
@@ -11,6 +15,7 @@ const Grafico = ({ plotData, divClassName = "w-full h-[500px]" }) => {
 
     useLayoutEffect(() => {
         if (inView) {
+            if (entry === undefined) return;
             const t = entry.target as HTMLElement;
             setWidth(t.offsetWidth);
             setHeight(t.offsetHeight);
@@ -18,15 +23,21 @@ const Grafico = ({ plotData, divClassName = "w-full h-[500px]" }) => {
     }, [inView]);
 
     return (
-
         <div ref={ref} className={divClassName}>
+            <Suspense
+                fallback={
+                    <div className="bg-red-500 w-10 h-10 text-center align-middle">
+                        Cargando...
+                    </div>
+                }
+            ></Suspense>
             <Plot
                 data={plotData.data}
                 layout={{
                     width,
                     height,
                     margin: { l: 40, r: 0, t: 0, b: 10 },
-                    pad:{l: 0, r: 0, t: 0, b: 0},
+                    //pad: { l: 0, r: 0, t: 0, b: 0 },
                     ...plotData.layout,
                 }}
                 config={{
