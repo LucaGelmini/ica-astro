@@ -6,13 +6,12 @@ export interface Props {
     data: {
         amount: number;
         variation?: number;
-        isBalance?: boolean;
     };
     className: string;
 }
 
 const {
-    data: { amount, variation, isBalance = false },
+    data: { amount, variation },
     className,
 } = Astro.props;
 ---
@@ -43,7 +42,7 @@ const {
                                 <ArrowUp className={"h-6"} />
                             )}
                         </span>
-                        <p>{variation.toLocaleString("es-AR")}%</p>
+                        <p>{(variation * 100).toLocaleString("es-AR")}%</p>
                     </div>
                 </div>
             )

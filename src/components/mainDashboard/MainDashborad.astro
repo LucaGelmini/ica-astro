@@ -2,20 +2,14 @@
 import Grafico from "../Grafico";
 import plotAndTitle from "../../data/plots/sunburst_rubros_usos_mensual.json";
 import IndicadorMainDashboard from "./IndicadorMainDashboard.astro";
+import data from "../../data/dashboards/datos_barra_cajas.json";
 
-const dummyBoxesData = {
-    x: { amount: 7089, variation: 14.5 },
-    m: { amount: 5750, variation: -0.3 },
-};
+const {
+    monthly: { x: monthlyX, m: monthlyM },
+    accumulated: { x: accumX, m: accumM },
+} = data.boxes;
 
-const expoPercentage =
-    (dummyBoxesData.x.amount /
-        (dummyBoxesData.x.amount + dummyBoxesData.m.amount)) *
-    100;
-const impoPercentage =
-    (dummyBoxesData.m.amount /
-        (dummyBoxesData.x.amount + dummyBoxesData.m.amount)) *
-    100;
+const { monthly: barMonthly, accumulated: barAccum } = data.bar;
 ---
 
 <div
@@ -41,12 +35,20 @@ const impoPercentage =
         <div class="w-full flex">
             <div class:list={`w-expo bg-expo h-min text-center`}>
                 <p class="texg-lg font-semibold md:text-lg">
-                    {Number(expoPercentage.toFixed(1)).toLocaleString("es-AR")}%
+                    {
+                        Number(
+                            (barMonthly.xPercentage * 100).toFixed(1)
+                        ).toLocaleString("es-AR")
+                    }%
                 </p>
             </div>
             <div class:list={`w-impo bg-impo h-min text-center`}>
                 <p class="texg-lg font-semibold md:text-lg">
-                    {Number(impoPercentage.toFixed(1)).toLocaleString("es-AR")}%
+                    {
+                        Number(
+                            (barMonthly.mPercentage * 100).toFixed(1)
+                        ).toLocaleString("es-AR")
+                    }%
                 </p>
             </div>
         </div>
@@ -54,17 +56,17 @@ const impoPercentage =
     <div
         class="w-full row-span-3 flex flex-col justify-around items-center md:flex-row md:items-stretch md:row-span-1"
     >
-        <IndicadorMainDashboard data={dummyBoxesData.x} className="bg-expo">
+        <IndicadorMainDashboard data={monthlyX} className="bg-expo">
             Exportaciones
         </IndicadorMainDashboard>
         <IndicadorMainDashboard
-            data={{ amount: dummyBoxesData.x.amount - dummyBoxesData.m.amount }}
+            data={{ amount: monthlyX.amount - monthlyM.amount }}
             className={"bg-balance"}
         >
             Saldo
         </IndicadorMainDashboard>
 
-        <IndicadorMainDashboard data={dummyBoxesData.m} className={"bg-impo"}>
+        <IndicadorMainDashboard data={monthlyM} className={"bg-impo"}>
             Importaciones
         </IndicadorMainDashboard>
     </div>

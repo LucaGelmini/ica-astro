@@ -1,1 +1,34 @@
-{"bar": {"mensual": {"xPercentage": 0.5521623013420706, "mPercentage": 0.4478376986579294}, "acumulada": {"xPercentage": 0.5182650224446962, "mPercentage": 0.4817349775553037}}, "boxes": {"mensual": {"xMonto": 7089.00001704, "mMonto": 5749.61645462, "xVar": 0.14501446402631113, "mVar": -0.003020544143380821}, "acumulada": {"xMonto": 82293.57165406, "mMonto": 76493.08785437999, "xVar": 0.05593500973627741, "mVar": 0.21064488467828424}}}
+{
+    "bar": {
+        "monthly": {
+            "xPercentage": 0.5521623013420706,
+            "mPercentage": 0.4478376986579294
+        },
+        "accumulated": {
+            "xPercentage": 0.5182650224446962,
+            "mPercentage": 0.4817349775553037
+        }
+    },
+    "boxes": {
+        "monthly": {
+            "x": {
+                "amount": 7089.00001704,
+                "variation": 0.14501446402631113
+            },
+            "m": {
+                "amount": 5749.61645462,
+                "variation": -0.003020544143380821
+            }
+        },
+        "accumulated": {
+            "x": {
+                "amount": 82293.57165406,
+                "variation": 0.05593500973627741
+            },
+            "m": {
+                "amount": 76493.08785437999,
+                "variation": 0.21064488467828424
+            }
+        }
+    }
+}
