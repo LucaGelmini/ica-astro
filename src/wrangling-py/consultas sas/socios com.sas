@@ -124,7 +124,17 @@ left join work.pais b
 	on (a.pdest_final=b.ccod_pais)
 ;quit;
 
+PROC export data= work.socios_expo3
+DBMS=CSV
+outfile = "/srv/sas/secex/home/mbasualdo/ICA_web/socios_expo.csv"
+replace ;
+;
 
+PROC export data= work.socios_impo2
+DBMS=CSV
+outfile = "/srv/sas/secex/home/mbasualdo/ICA_web/socios_impo.csv"
+replace ;
+;
 
 
 
