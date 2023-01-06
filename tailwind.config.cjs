@@ -1,15 +1,9 @@
 /** @type {import('tailwindcss').Config} */
 const colors = require('tailwindcss/colors');
 const fs = require('fs');
-const data = JSON.parse(fs.readFileSync('./src/data/prueba.json'));
-const expoPercentage =
-	(data.x.amount /
-		(data.x.amount + data.m.amount)) *
-	100;
-const impoPercentage =
-	(data.m.amount /
-		(data.x.amount + data.m.amount)) *
-	100;
+const data = JSON.parse(fs.readFileSync('./src/data/dashboards/datos_barra_cajas.json'));
+const expoPercentage = data.bar.mensual.xPercentage;
+const impoPercentage = data.bar.mensual.mPercentage;
 module.exports = {
 	content: ['./src/**/*.{astro,html,js,jsx,md,mdx,svelte,ts,tsx,vue}'],
 	theme: {

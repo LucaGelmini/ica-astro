@@ -27,7 +27,7 @@ locale.setlocale(locale.LC_ALL, 'es_ES')
 
 def plot_desestacionalizado(df):
     new_date = [d.strftime('%b %Y').replace(".","").capitalize() for d in df.index]
-    x = new_date
+    
     plot_desestacionalizado = go.Figure()
     plot_desestacionalizado.add_trace(go.Scatter(x = new_date,
                             y = df["Serie original"].round(2),
@@ -37,9 +37,9 @@ def plot_desestacionalizado(df):
     plot_desestacionalizado.add_trace(go.Scatter(x = new_date, y = df["Tendencia-ciclo"].round(2),
                             name = "Tendencia-Ciclo", mode = "lines", line_width = 2.5,hovertemplate="$%{y:,.0f}"))
     plot_desestacionalizado.update_xaxes(nticks = 10)
-    plot_desestacionalizado.update_yaxes(tickformat = ",")
+    plot_desestacionalizado.update_yaxes(tickformat = ",", title_text = "Millones USD")
     plot_desestacionalizado.update_layout(separators = ",.",template = None, hovermode = "x unified", title_text="",
-                    font_family = "georgia",
+                    font_family = "verdana",
                     legend = dict(
                         yanchor="top", orientation = "h",
         y=-0.1,
@@ -48,3 +48,12 @@ def plot_desestacionalizado(df):
                     ))
     return plot_desestacionalizado
 
+nombres_columnas = ['<-Año>', '<-Mes>', '<-Serie original>', '<-Serie desestacionalizada>',
+'<-Tendencia ciclo>',
+'<Variación con respecto a igual período del año anterior - Serie original>',
+'<Variacion con respecto al mes anterior - Serie desestacionalizada>',
+'Variacion con respecto al mes anterior - Tendencia ciclo']
+desest_tabla_expo.reset_index(drop=False,inplace=True)
+desest_tabla_expo.columns = nombres_columnas
+desest_tabla_impo.reset_index(drop=False,inplace=True)
+desest_tabla_impo.columns = nombres_columnas

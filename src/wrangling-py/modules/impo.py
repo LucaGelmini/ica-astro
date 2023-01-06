@@ -21,8 +21,8 @@ plot_impo_usos = px.histogram(df_grafico2[df_grafico2.Usos != "Total"], x="Usos"
     "Usos": "Uso",
     "sum of Dólares": "Dólares"
 })
-plot_impo_usos.update_yaxes(tickformat=",", title_text='En millones de USD')
-plot_impo_usos.update_layout(separators=",.", font_family='georgia', title_text="Importación por usos económicos. Octubre de 2022 y octubre de 2021",
+plot_impo_usos.update_yaxes(tickformat=",", title_text='Millones de USD')
+plot_impo_usos.update_layout(separators=",.", font_family='verdana', title_text="Importación por usos económicos. Octubre de 2022 y octubre de 2021",
                              legend=dict(
                                  yanchor="top", orientation="h",
                                  y=1.07,
