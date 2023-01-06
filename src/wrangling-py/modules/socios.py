@@ -54,7 +54,7 @@ def genera_tabla_presentable_acumulado(df_acumulado, comercio):
     return socios_sas_acumulado_presentable
     
 #IMPORTACIONES
-socios_sas_impo = pd.read_csv(f"{DIR}socios_impo.csv", sep=";")
+socios_sas_impo = pd.read_csv(f"{DIR}socios_impo.csv", sep=";", encoding="latin-1")
 socios_sas_impo.cif = socios_sas_impo.cif/1000000
 
 #Agregamos continentes y capitalizamos los países
@@ -72,7 +72,7 @@ socios_sas_impo_mensual_presentable = genera_tabla_presentable_mensual(socios_sa
 socios_sas_impo_acumulado_presentable = genera_tabla_presentable_acumulado(socios_sas_impo_acumulado, "impo")
 
 #EXPORTACIONES
-socios_sas_expo = pd.read_csv(f"{DIR}socios_expo.csv", sep=";")
+socios_sas_expo = pd.read_csv(f"{DIR}socios_expo.csv", sep=";", encoding="latin-1")
 socios_sas_expo.fob = socios_sas_expo.fob/1000000
 
 #Agregamos continentes y capitalizamos los países
@@ -89,7 +89,7 @@ socios_sas_expo_acumulado_presentable = genera_tabla_presentable_acumulado(socio
 
 def plot_anillo_socios(acumulado:bool):
     df = socios_sas_expo_acumulado_presentable if acumulado else socios_sas_expo_mensual_presentable
-    fecha = f"Acumulado hasta {DIC_MESES[ultimo_mes]} de {ultimo_anio}" if acumulado else f"Mes de {DIC_MESES[ultimo_mes]}"
+    fecha = f"acumulado hasta {DIC_MESES[ultimo_mes]} de {ultimo_anio}" if acumulado else f"mes de {DIC_MESES[ultimo_mes]}"
     total = "{:,d}".format(int(round(df['Millones de dólares'].sum(),0))).replace(",",".")+"M"
     fig = go.Figure(data=[go.Pie(labels=df.País, values=df['Millones de dólares'], hole=.5)])
     fig.update_layout(title_text = f"Principales países de exportación: {fecha}", template = None, font_family = "verdana",

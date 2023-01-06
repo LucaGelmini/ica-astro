@@ -78,7 +78,7 @@ plot_agregado.add_trace(
         hovertemplate="$%{y:,.0f}"
     )    
 )
-plot_agregado.update_layout(template = "none",separators=",.", font_family="verdana")
+plot_agregado.update_layout(template = "none",separators=",.", font_family="verdana", title_text = "")
 plot_agregado.update_yaxes(tickformat = ",",dtick=1000, title_text = "Millones de USD")
 plot_agregado.update_xaxes(rangeslider=dict(
             visible=True,

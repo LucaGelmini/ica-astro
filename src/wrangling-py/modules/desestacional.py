@@ -53,5 +53,7 @@ nombres_columnas = ['<-Año>', '<-Mes>', '<-Serie original>', '<-Serie desestaci
 '<Variación con respecto a igual período del año anterior - Serie original>',
 '<Variacion con respecto al mes anterior - Serie desestacionalizada>',
 'Variacion con respecto al mes anterior - Tendencia ciclo']
+desest_tabla_expo.reset_index(drop=False,inplace=True)
 desest_tabla_expo.columns = nombres_columnas
+desest_tabla_impo.reset_index(drop=False,inplace=True)
 desest_tabla_impo.columns = nombres_columnas

@@ -1,6 +1,7 @@
-%let p_anio_comu = 2022;
-%let p_anio=2022;
-%let p_mes_comu = 11;
+%let p_anio = 2022;
+%let p_mes = 11;
+
+/*Hay que corregir el filtro del año*/
 
 filename entrada1 "/srv/sas/secex/home/comunicado/tablas/PAIS.xlsx";
 PROC IMPORT 
@@ -31,7 +32,7 @@ from secexh.ce_tm3a a
 left join secex.ce_pais c
 	on (a.porg = c.ccod_pais)
 
-where a.fech_aa >= '21' ) b
+where a.fech_aa >= substr(put(&p_anio -1,4.),3,2) ) b
 
 group by
 b.fech_aaaa,
@@ -69,8 +70,8 @@ select distinct
  where 
         b.cpublicado='S' 
     AND b.nmarca IN (1,3)
-    and a.nanio_comu = &p_anio_comu
-    AND a.nmes_comu= &p_mes_comu
+    and a.nanio_comu = &p_anio
+    AND a.nmes_comu= &p_mes
     AND  a.cdepto='E'
     and b.nanio_proceso = a.nanio_proceso
     and b.nnro_proceso = a.nnro_proceso

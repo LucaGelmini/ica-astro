@@ -18,18 +18,22 @@ genera_plot_json(plot_barras_usos_rubros(importacion=False,acumulado=False), "ba
 genera_plot_json(plot_barras_usos_rubros(importacion=False,acumulado=True), "barras_expo_acumulado")
 genera_plot_json(plot_barras_usos_rubros(importacion=True,acumulado=False), "barras_impo_mensual")
 genera_plot_json(plot_barras_usos_rubros(importacion=True,acumulado=True), "barras_impo_acumulado")
+print("barras terminado")
 
 genera_plot_json(plot_sunburst_usos_rubros(acumulado=False), "sunburst_rubros_usos_mensual")
 genera_plot_json(plot_sunburst_usos_rubros(acumulado=True), "sunburst_rubros_usos_acumulado")
+print("sunburst rubros usos terminado")
 
 genera_plot_json(plot_agregado,"plot_agregado") #no tiene titulo
 genera_plot_json(plot_desestacionalizado(df_plot_desest_expo),"plot_desestacionalizado_expo") #no tiene titulo
 genera_plot_json(plot_desestacionalizado(df_plot_desest_impo), "plot_desestacionalizado_impo") #no tiene titulo
+print("desestacionalizado terminado")
 
 genera_plot_json(plots_socios[0], "sunburst_socios_impo_mensual")
 genera_plot_json(plots_socios[1], "sunburst_socios_impo_acumulado")
 genera_plot_json(plots_socios[2], "anillo_socios_expo_mensual")
 genera_plot_json(plots_socios[3], "anillo_socios_expo_acumulado")
+print("socios terminados")
 
 # Tablas
 df_grafico1_tabla.to_json(f"{DIR_CUADROS}df_grafico1_tabla.json", force_ascii=False, orient='table')
