@@ -1,3 +1,6 @@
+import locale 
+locale.setlocale(locale.LC_ALL, 'es_ES')
+
 #Direcciones para los datos a importar y a exportar
 DIR = "./src/wrangling-py/data/"
 DIR_PLOTS = "./src/data/plots/"
