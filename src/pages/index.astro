@@ -5,7 +5,7 @@ import Tabs from "../layouts/Tabs.astro";
 import Tab from "../components/tab.astro";
 import TabsContent from "../layouts/TabsContent.astro";
 
-import data from "../data/plots/plot_agregado.json";
+import plotAgregado from "../data/plots/plot_agregado.json";
 import r2Data from "../data/cuadros/r2_df.json";
 import c2Expo from "../data/cuadros/c2_expo.json";
 import c2Impo from "../data/cuadros/c2_impo.json";
@@ -19,65 +19,58 @@ import MainDashborad from "../components/mainDashboard/MainDashborad.astro";
 ---
 
 <Layout title="Intercambio comercial Argentino" mainHeader="Síntesis">
-    <section>
-        <MainDashborad />
-    </section>
-    <section>
-        <Collapsible sumaryText="Síntesis de los resultados">
-            <Texto1 />
-        </Collapsible>
-        <Tabs id="tabsSaldo">
-            <Tab contentRef="graficoSaldo" defaultTab={true}
-                >Exportaciones, importaciones y saldo comercial</Tab
-            >
-            <Tab contentRef="tabla1">Principales indicadores</Tab>
-        </Tabs>
+  <section class="w-full" mb-4>
+    <MainDashborad />
+  </section>
+  <section class="w-full" mb-4>
+    <Collapsible sumaryText="Síntesis de los resultados">
+      <Texto1 />
+    </Collapsible>
+    <Tabs id="tabsSaldo">
+      <Tab contentRef="graficoSaldo" defaultTab={true}>
+        Exportaciones, importaciones y saldo comercial
+      </Tab>
+      <Tab contentRef="tabla1">Principales indicadores</Tab>
+    </Tabs>
 
-        <TabsContent tabsId="tabsSaldo">
-            <div id="graficoSaldo" class="w-full">
-                <Grafico plotData={data} client:only="react" />
-            </div>
-            <div id="tabla1" class="hidden w-full overflow-x-auto">
-                <StaticTable
-                    tableData={r2Data}
-                    tableId="R2"
-                    innerTitles={[0, 5]}
-                    hideIndex={true}
-                    roundNumeric={1}
-                    rowEmphasis={[1]}
-                />
-                <!-- <CuadroR2 tableData = {r2Data} client:only="react" /> -->
-                <!-- <SuperTable client:only="react" /> -->
-            </div>
-        </TabsContent>
-    </section>
-    <section class="mt-10">
-        <h3 class="text-3xl font-semibold my-4">
-            Índices de valores, precios y cantidades y efecto de los términos
-            del intercambio de octubre de 2022
-        </h3>
-        <Tabs id="otrasTabs">
-            <Tab contentRef="otraTab1" defaultTab={true}>Exportaciones</Tab>
-            <Tab contentRef="otraTab2">Importaciones</Tab>
-        </Tabs>
-        <TabsContent tabsId="otrasTabs">
-            <div id="otraTab1" class="overflow-x-auto w-full">
-                <StaticTable
-                    tableData={c2Expo}
-                    tableId="c2Expo"
-                    roundNumeric={1}
-                />
-            </div>
-            <div id="otraTab2" class="overflow-x-auto hidden w-full">
-                <StaticTable
-                    tableData={c2Impo}
-                    tableId="c2Impo"
-                    roundNumeric={1}
-                />
-            </div>
-        </TabsContent>
-        <Collapsible sumaryText="Análisis">
-            <Texto2 />
-        </Collapsible>
-    </section>
+    <TabsContent tabsId="tabsSaldo">
+      <div id="graficoSaldo" class="w-full">
+        <h3 class="font-semibold text-lg">{plotAgregado.title}</h3>
+        <Grafico plotData={plotAgregado.plot} client:only="react" />
+      </div>
+      <div id="tabla1" class="hidden w-full overflow-x-auto">
+        <StaticTable
+          tableData={r2Data}
+          tableId="R2"
+          innerTitles={[0, 5]}
+          hideIndex={true}
+          roundNumeric={1}
+          rowEmphasis={[1]}
+        />
+        <!-- <CuadroR2 tableData = {r2Data} client:only="react" /> -->
+        <!-- <SuperTable client:only="react" /> -->
+      </div>
+    </TabsContent>
+  </section>
+  <section class="w-full mb-4">
+    <h3 class="text-3xl font-semibold my-4">
+      Índices de valores, precios y cantidades y efecto de los términos del
+      intercambio de octubre de 2022
+    </h3>
+    <Tabs id="otrasTabs">
+      <Tab contentRef="otraTab1" defaultTab={true}>Exportaciones</Tab>
+      <Tab contentRef="otraTab2">Importaciones</Tab>
+    </Tabs>
+    <TabsContent tabsId="otrasTabs">
+      <div id="otraTab1" class="overflow-x-auto w-full">
+        <StaticTable tableData={c2Expo} tableId="c2Expo" roundNumeric={1} />
+      </div>
+      <div id="otraTab2" class="overflow-x-auto hidden w-full">
+        <StaticTable tableData={c2Impo} tableId="c2Impo" roundNumeric={1} />
+      </div>
+    </TabsContent>
+    <Collapsible sumaryText="Análisis">
+      <Texto2 />
+    </Collapsible>
+  </section>
 </Layout>
