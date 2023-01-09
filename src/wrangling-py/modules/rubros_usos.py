@@ -238,10 +238,33 @@ def genera_datos_barra_index():
         prueba_acumulada.valor.sum()
 
     return {
-        "bar": {"mensual": {"xPercentage": prueba_mensual.proporcion[0], "mPercentage": prueba_mensual.proporcion[1]},
-                "acumulada": {"xPercentage": prueba_acumulada.proporcion[0], "mPercentage": prueba_acumulada.proporcion[1]},
+        "bar": {
+            "monthly":{
+                "xPercentage": prueba_mensual.proporcion[0],
+                "mPercentage": prueba_mensual.proporcion[1]},
+            "accumulated": {
+                "xPercentage": prueba_acumulada.proporcion[0], 
+                "mPercentage": prueba_acumulada.proporcion[1]},
                 },
-        "boxes": {"mensual": {"xMonto": prueba_mensual.valor[0], "mMonto": prueba_mensual.valor[1], "xVar": prueba_mensual.variacion[0], "mVar": prueba_mensual.variacion[1]},
-                  "acumulada": {"xMonto": prueba_acumulada.valor[0], "mMonto": prueba_acumulada.valor[1], "xVar": prueba_acumulada.variacion[0], "mVar": prueba_acumulada.variacion[1]},
+        "boxes":{
+            "monthly": {
+                "x":{
+                    "amount":prueba_mensual.valor[0], 
+                    "variation": prueba_mensual.variacion[0]
+                },
+                "m": {
+                    "amount":prueba_mensual.valor[1], 
+                    "variation": prueba_mensual.variacion[1]
+                    },
+            },
+            "accumulated": {
+                "x": {
+                    "amount":prueba_acumulada.valor[0], 
+                    "variation": prueba_acumulada.variacion[0]
+                }, 
+                "m":{
+                    "amount": prueba_acumulada.valor[1],  
+                    "variation": prueba_acumulada.variacion[1]},
                   }
+            }
     }
