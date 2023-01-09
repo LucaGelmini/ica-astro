@@ -1,9 +1,11 @@
+import type { PlotlyDataLayoutConfig } from "plotly.js";
 import { useLayoutEffect, lazy, useState, Suspense } from "react";
 import { useInView } from "react-intersection-observer";
+import Spinner from "./Spinner";
 const Plot = lazy(() => import("react-plotly.js"));
 
 type Props = {
-    plotData: { data: Array<object>; layout: Array<object> };
+    plotData: PlotlyDataLayoutConfig;
     divClassName: string;
 };
 
@@ -20,18 +22,14 @@ const Grafico = ({ plotData, divClassName = "w-full h-[500px]" }: Props) => {
             setWidth(t.offsetWidth);
             setHeight(t.offsetHeight);
         }
-    }, [inView]);
+    }, [inView, entry]);
 
     return (
+        <Suspense
+            fallback= {<Spinner className="w-full h-28" />}
+        >
         <div ref={ref} className={divClassName}>
-            <Suspense
-                fallback={
-                    <div className="bg-red-500 w-10 h-10 text-center align-middle">
-                        Cargando...
-                    </div>
-                }
-            ></Suspense>
-            <Plot
+                            <Plot
                 data={plotData.data}
                 layout={{
                     width,
@@ -57,6 +55,7 @@ const Grafico = ({ plotData, divClassName = "w-full h-[500px]" }: Props) => {
                 }}
             />
         </div>
+        </Suspense>
     );
 };
 
