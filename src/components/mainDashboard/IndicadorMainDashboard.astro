@@ -8,11 +8,13 @@ export interface Props {
         variation?: number;
     };
     className: string;
+    precision?: number;
 }
 
 const {
     data: { amount, variation },
     className,
+    precision = 1,
 } = Astro.props;
 ---
 
@@ -27,7 +29,9 @@ const {
             <slot />
         </h4>
         <div class="font-semibold col-span-1 align-middle">
-            <p class="text-lg text-center">{amount.toLocaleString("es-AR")}</p>
+            <p class="text-lg text-center">
+                {Number(amount.toFixed(precision)).toLocaleString("es-AR")}
+            </p>
             <p class="text-sm text-center">millones de dólares</p>
         </div>
         {
@@ -42,7 +46,12 @@ const {
                                 <ArrowUp className={"h-6"} />
                             )}
                         </span>
-                        <p>{(variation * 100).toLocaleString("es-AR")}%</p>
+                        <p>
+                            {Number(
+                                (variation * 100).toFixed(precision)
+                            ).toLocaleString("es-AR")}
+                            %
+                        </p>
                     </div>
                 </div>
             )
