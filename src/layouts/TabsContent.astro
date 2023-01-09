@@ -19,11 +19,13 @@ const { tabsId } = Astro.props;
         constructor() {
             super();
 
-            let tabsId = this.dataset.id;
+            const tabsId = this.dataset.id;
 
-            let tabsContainer = document.querySelector(`#${tabsId}`);
+            const tabsContainer = document.querySelector(`#${tabsId}`);
+            if (tabsContainer == null)
+                throw new Error(`TabId:${tabsId} is invalid`);
 
-            let tabTogglers = tabsContainer.querySelectorAll(`#${tabsId} a`);
+            const tabTogglers = tabsContainer.querySelectorAll(`#${tabsId} a`);
 
             tabsContainer
                 .querySelector("#default-tab-container")
@@ -39,8 +41,7 @@ const { tabsId } = Astro.props;
                 toggler.addEventListener("click", function (e) {
                     e.preventDefault();
                     let target = e.target as Element;
-
-                    let tabName = this.getAttribute("href");
+                    let tabName = this.getAttribute("href") as string;
 
                     let tabContents = document.querySelector(
                         `#${tabsId}-contents`
