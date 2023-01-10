@@ -1,15 +1,18 @@
 ---
 export interface Props {
     tooltipMsg: string;
-    className: string;
+    className?: string;
+    childClassName?: string;
 }
 
-const { tooltipMsg, className } = Astro.props;
+const { tooltipMsg, className, childClassName } = Astro.props;
 ---
 
 <div class={className}>
-    <div class="tooltip relative inline-block">
-        <slot />
+    <div class="tooltip relative inline-block w-full h-full">
+        <div class={childClassName}>
+            <slot />
+        </div>
         <span class="tooltiptext">{tooltipMsg}</span>
     </div>
 </div>

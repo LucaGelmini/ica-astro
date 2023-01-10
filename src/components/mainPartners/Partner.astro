@@ -1,0 +1,87 @@
+---
+import ArrowDown from "../../icons/ArrowDown.astro";
+import ArrowUp from "../../icons/ArrowUp.astro";
+import Tooltip from "../Tooltip.astro";
+
+export interface Props {
+    country: {
+        name: string;
+        xAmount: number;
+        xVar: number;
+        mAmount: number;
+        mVar: number;
+        balance: number;
+        flag: string;
+    };
+    precision?: number;
+}
+
+const { country, precision = 1 } = Astro.props;
+
+const roundAndFormatNumber = (
+    value: number,
+    precision: number,
+    locale = "es-AR"
+) => Number(value.toFixed(precision)).toLocaleString(locale);
+---
+
+<link
+    rel="stylesheet"
+    href="https://cdn.jsdelivr.net/gh/lipis/flag-icons@6.6.6/css/flag-icons.min.css"
+/>
+<div class="grid grid-rows-4 p-2">
+    <Tooltip
+        tooltipMsg={country.name}
+        className="text-center align-middle w-full h-full"
+        childClassName=" overflow-hidden mx-auto w-full h-full text-center align-bottom flex justify-center"
+    >
+        <h4 class="h-10 w-14 overflow-hidden rounded-md">
+            <span
+                class={`fi-${country.flag} w-full bg-contain bg-center bg-no-repeat block h-full scale-125`}
+            ></span>
+        </h4>
+    </Tooltip>
+    <div class="text-center">
+        <p class="text-xs font-semibold">Exportaciones</p>
+        <span class="text-sm"
+            >{roundAndFormatNumber(country.xAmount, precision)}</span
+        >
+        <span>
+            {
+                country.xVar < 0 ? (
+                    <ArrowDown className="w-3 h-3 fill-red-700 inline" />
+                ) : (
+                    <ArrowUp className="w-3 h-3 fill-green-700 inline" />
+                )
+            }
+        </span>
+
+        <span class="text-sm"
+            >{roundAndFormatNumber(country.xVar, precision)}%</span
+        >
+    </div>
+    <div class="text-center">
+        <p class="text-xs font-semibold">Impotaciones</p>
+        <span class="text-sm"
+            >{roundAndFormatNumber(country.mAmount, precision)}</span
+        >
+        <span>
+            {
+                country.mVar < 0 ? (
+                    <ArrowDown className="h-3 w-3 fill-red-700 inline" />
+                ) : (
+                    <ArrowUp className="h-3 w-3 fill-green-700 inline" />
+                )
+            }
+        </span>
+        <span class="text-sm"
+            >{roundAndFormatNumber(country.mVar, precision)}%</span
+        >
+    </div>
+    <div class="text-center">
+        <p class="text-xs font-semibold">Saldo</p>
+        <span class="text-sm"
+            >{roundAndFormatNumber(country.balance, precision)}</span
+        >
+    </div>
+</div>

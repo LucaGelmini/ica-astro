@@ -34,7 +34,7 @@ const Grafico = ({ plotData, divClassName = "w-full h-[500px]" }: Props) => {
                 layout={{
                     width,
                     height,
-                    margin: { l: 40, r: 0, t: 0, b: 10 },
+                    margin: { l: 55, r: 0, t: 0, b: 10 },
                     //pad: { l: 0, r: 0, t: 0, b: 0 },
                     ...plotData.layout,
                 }}

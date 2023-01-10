@@ -16,11 +16,15 @@ import { Content as Texto1 } from "../data/textos/index_1.md";
 import { Content as Texto2 } from "../data/textos/index_2.md";
 import StaticTable from "../components/tables/StaticTable.astro";
 import MainDashborad from "../components/mainDashboard/MainDashborad.astro";
+import MainPartners from "../components/mainPartners/MainPartners.astro";
 ---
 
 <Layout title="Intercambio comercial Argentino" mainHeader="Síntesis">
     <section class="w-full" mb-4>
         <MainDashborad />
+    </section>
+    <section class="w-full">
+        <MainPartners />
     </section>
     <section class="w-full" mb-4>
         <Collapsible sumaryText="Síntesis de los resultados">
