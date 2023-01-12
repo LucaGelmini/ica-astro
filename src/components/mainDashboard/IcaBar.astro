@@ -1,0 +1,54 @@
+---
+import { bar } from "../../data/dashboards/datos_barra_cajas.json";
+const { monthly: barMonthly, accumulated: barAccum } = bar;
+
+export interface Props {
+    className?: string;
+}
+const { className = "w-1/6" } = Astro.props;
+---
+
+<div class:list={["flex items-stetch justify-between", className]}>
+    <div
+        class="hidden lg:block w-1/6 text-center rotate-180 text-xl font-bold"
+        style="writing-mode: vertical-lr;"
+    >
+        Noviembre
+    </div>
+    <div class="flex lg:flex-col w-full">
+        <div
+            class="w-expo h-full lg:w-full lg:h-expo flex flex-col justify-center items-center"
+        >
+            <p class="texg-xl font-semibold md:text-2xl">
+                {
+                    Number(
+                        (barMonthly.xPercentage * 100).toFixed(1)
+                    ).toLocaleString("es-AR")
+                }%
+            </p>
+            <p class="">Exportaciones</p>
+        </div>
+        <div
+            class="w-expo h-full lg:w-full lg:h-expo flex flex-col justify-center items-center"
+        >
+            <p class="texg-xl font-semibold md:text-2xl">
+                {
+                    Number(
+                        (barMonthly.mPercentage * 100).toFixed(1)
+                    ).toLocaleString("es-AR")
+                }%
+            </p>
+            <p class="">Importaciones</p>
+        </div>
+    </div>
+    <div class="h-full flex lg:flex-col w-1/8">
+        <div
+            class="bg-expo 'w-expo h-full lg:w-full lg:h-expo align-middle text-center'"
+        >
+        </div>
+        <div
+            class="bg-impo w-expo h-full lg:w-full lg:h-expo align-middle text-center"
+        >
+        </div>
+    </div>
+</div>
