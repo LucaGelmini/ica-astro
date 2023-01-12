@@ -22,15 +22,17 @@ const {
 
 <div
     class:list={[
-        "flex flex-col items-center justify-center h-min my-1 max-h-32 rounded-md shadow-md p-2",
+        "flex flex-col items-stretch justify-around lg:items-center lg:justify-center h-min my-1 max-h-32 rounded-md shadow-md p-2",
         className,
     ]}
 >
     <h4 class="my-auto font-semibold text-center col-span-1 h-min">
         <slot />
     </h4>
-    <div class="my-auto w-full grid grid-cols-2 grid-rows-1">
-        <div>
+    <div
+        class="my-auto w-full grid grid-cols-1 grid-rrows-2 lg:grid-cols-2 lg:grid-rows-1"
+    >
+        <div class="">
             <div
                 class="font-semibold col-span-1 flex flex-col items-center justify-around"
             >
@@ -42,7 +44,7 @@ const {
         </div>
         {
             variation && (
-                <div>
+                <div class="flex items-center justify-center lg:block">
                     <div class="px-2 col-span-1  flex items-center justify-around">
                         <div class="px-2 flex justify-center items-center text-lg font-semibold">
                             <span>

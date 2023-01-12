@@ -4,14 +4,18 @@ import data from "../../data/dashboards/datos_barra_cajas.json";
 import Grafico from "../Grafico";
 import plotAndTitle from "../../data/plots/sunburst_rubros_usos_mensual.json";
 import IcaBar from "./IcaBar.astro";
+import ArrowDown from "../../icons/ArrowDown.astro";
+import ArrowUp from "../../icons/ArrowUp.astro";
+import Curve from "./Curve.astro";
 const {
     monthly: { x: monthlyX, m: monthlyM },
     accumulated: { x: accumX, m: accumM },
 } = data.boxes;
+const IcaVariation = 7.4;
 ---
 
-<div class="flex">
-    <IcaBar className="w-1/8" />
+<div class="flex flex-col lg:flex-row lg:h-60">
+    <IcaBar className="mb-2 lg:w-1/8 lg:mb-0" />
     <div class="grid grid-rows-3 lg:grid-cols-3 lg:grid-rows-1 w-full">
         <div id="sunburst" class="flex justify-center items-center">
             <div
@@ -26,7 +30,7 @@ const {
                                 name: "Intercambio comercial argentino",
                                 textinfo: "none",
                                 hoverinfo: "label+value+percent",
-                                hole: 0.6,
+                                hole: 0.65,
                                 type: "pie",
                                 rotation: -90,
                                 marker: { colors: ["#fbbf24", "#a78bfa"] },
@@ -44,49 +48,61 @@ const {
                 <div
                     class="absolute bg-white rounded-full left-1/6 top-1/6 -z-10 w-2/3 h-2/3 flex justify-center items-center flex-col"
                 >
-                    <p>Saldo comercial</p>
-                    <p>1234</p>
-                    <p>millones de dólares</p>
+                    <p class="text-xs text-center font-semibold">
+                        Intercambio comercial argentino
+                    </p>
+                    <p class="text-2xl text-center font-bold">
+                        {accumX.amount.toFixed(0)}
+                    </p>
+                    <p class="text-xs">millones de dólares</p>
+                    <div
+                        class:list={[
+                            "flex font-semibold",
+                            IcaVariation < 0
+                                ? "text-red-700"
+                                : "text-green-700",
+                        ]}
+                    >
+                        <span class="flex items-center"
+                            >{
+                                IcaVariation < 0 ? (
+                                    <ArrowDown className="h-4 fill-red-700" />
+                                ) : (
+                                    <ArrowUp className="h-4 fill-green-700" />
+                                )
+                            }</span
+                        >
+                        <span>{IcaVariation.toFixed(1)}%</span>
+                    </div>
                 </div>
             </div>
         </div>
-        <div id="count" class="flex">
+        <div id="count" class="flex flex-col items-stretch lg:flex-row">
             <div
                 id="sum"
-                class="w-1/8 h-3/5 my-auto grid grid-rows-3 grid-cols-1 mr-2"
+                class="h-1/6 w-3/4 mx-auto lg:w-1/8 lg:h-3/5 overflow-hidden my-auto grid grid-cols-3 grid-rows-1 lg:grid-rows-3 lg:grid-cols-1 lg:mr-2"
             >
-                <div class="w-full h-full overflow-hidden">
-                    <div
-                        class="bg-black relative rounded-full w-[200%] h-[200%] left-1/4 top-0"
-                    >
-                        <div
-                            class="absolute bg-white left-1/6 top-1/6 w-2/3 h-2/3 rounded-full"
-                        >
-                        </div>
-                    </div>
+                <Curve orientation={1} />
+                <div
+                    class="text-4xl text-center align-middle lg:pr-1/6 relative bottom-4 lg:bottom-0"
+                >
+                    +
                 </div>
-                <div class="text-3xl text-center align-middle pr-1/6">+</div>
-                <div class="w-full h-full overflow-hidden">
-                    <div
-                        class="bg-black relative rounded-full w-[200%] h-[200%] left-1/4 bottom-full"
-                    >
-                        <div
-                            class="absolute bg-white left-1/6 top-1/6 w-2/3 h-2/3 rounded-full"
-                        >
-                        </div>
-                    </div>
-                </div>
+                <Curve orientation={2} />
             </div>
-            <div id="indicators" class="w-3/4">
+            <div
+                id="indicators"
+                class="w-full lg:w-3/4 flex lg:flex-col justify-around"
+            >
                 <IndicadorMainDashboard
-                    className="bg-expo w-full mb-10"
+                    className="bg-expo w-2/5 lg:w-full lg:mb-10"
                     data={accumX}
                     precision={0}
                 >
                     Exportaciones
                 </IndicadorMainDashboard>
                 <IndicadorMainDashboard
-                    className="bg-impo w-full"
+                    className="bg-impo w-2/5 lg:w-full"
                     data={accumM}
                     precision={0}
                 >
@@ -95,29 +111,11 @@ const {
             </div>
             <div
                 id="substract"
-                class="w-1/8 h-3/5 my-auto grid grid-rows-3 grid-cols-1 ml-2"
+                class="h-1/6 w-3/4 mx-auto lg:w-1/8 lg:h-3/5 overflow-hidden my-auto grid grid-cols-3 grid-rows-1 lg:grid-rows-3 lg:grid-cols-1 lg:ml-2"
             >
-                <div class="w-full h-full overflow-hidden">
-                    <div
-                        class="bg-black relative rounded-full w-[200%] h-[200%] right-[125%] top-0"
-                    >
-                        <div
-                            class="absolute bg-white left-1/6 top-1/6 w-2/3 h-2/3 rounded-full"
-                        >
-                        </div>
-                    </div>
-                </div>
-                <div class="text-3xl text-center align-middle pl-1/6">-</div>
-                <div class="w-full h-full overflow-hidden">
-                    <div
-                        class="bg-black relative rounded-full w-[200%] h-[200%] right-[125%] bottom-full"
-                    >
-                        <div
-                            class="absolute bg-white left-1/6 top-1/6 w-2/3 h-2/3 rounded-full"
-                        >
-                        </div>
-                    </div>
-                </div>
+                <Curve orientation={3} />
+                <div class="text-4xl text-center align-middle lg:pl-1/6">-</div>
+                <Curve orientation={4} />
             </div>
         </div>
         <div id="balance" class="flex justify-center items-center">
@@ -125,9 +123,13 @@ const {
                 <div
                     class="absolute bg-white rounded-full left-1/6 top-1/6 z-10 w-2/3 h-2/3 flex justify-center items-center flex-col"
                 >
-                    <p>Saldo comercial</p>
-                    <p>1234</p>
-                    <p>millones de dólares</p>
+                    <p class="text-xs text-center font-semibold">
+                        Saldo comercial
+                    </p>
+                    <p class="text-2xl text-center font-bold">
+                        {(accumX.amount - accumM.amount).toFixed(0)}
+                    </p>
+                    <p class="text-xs">millones de dólares</p>
                 </div>
             </div>
         </div>

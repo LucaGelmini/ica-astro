@@ -1,0 +1,51 @@
+---
+export interface Props {
+    orientation: 1 | 2 | 3 | 4;
+}
+const { orientation } = Astro.props;
+---
+
+{
+    orientation === 1 && (
+        <div class="w-3/4 h-full justify-self-end lg:w-full lg:h-full">
+            <div class="w-full h-full overflow-hidden mx-auto lg:mx-0">
+                <div class="bg-black relative rounded-full w-[200%] h-[200%] left-1/4 top-0">
+                    <div class="absolute bg-white left-1/6 top-1/6 w-2/3 h-2/3 rounded-full" />
+                </div>
+            </div>
+        </div>
+    )
+}
+{
+    orientation === 2 && (
+        <div class="w-3/4 h-full justify-self-start lg:w-full lg:h-full">
+            <div class="w-full h-full overflow-hidden mx-auto lg:mx-0">
+                <div class="bg-black relative rounded-full w-[200%] h-[200%] lg:left-1/4 lg:right-0 lg:bottom-full right-[125%]">
+                    <div class="absolute bg-white left-1/6 top-1/6 w-2/3 h-2/3 rounded-full" />
+                </div>
+            </div>
+        </div>
+    )
+}
+{
+    orientation === 3 && (
+        <div class="w-3/4 h-full justify-self-end lg:w-full lg:h-full">
+            <div class="w-full h-full overflow-hidden mx-auto lg:mx-0">
+                <div class="bg-black relative rounded-full w-[200%] h-[200%] left-1/4 bottom-full lg:-left-[125%]  lg:top-0">
+                    <div class="absolute bg-white left-1/6 top-1/6 w-2/3 h-2/3 rounded-full" />
+                </div>
+            </div>
+        </div>
+    )
+}
+{
+    orientation === 4 && (
+        <div class="w-3/4 h-full justify-self-start lg:w-full lg:h-full">
+            <div class="w-full h-full overflow-hidden mx-auto lg:mx-0">
+                <div class="bg-black relative rounded-full w-[200%] h-[200%] bottom-full right-[125%]">
+                    <div class="absolute bg-white left-1/6 top-1/6 w-2/3 h-2/3 rounded-full" />
+                </div>
+            </div>
+        </div>
+    )
+}
