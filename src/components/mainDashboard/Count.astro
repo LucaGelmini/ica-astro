@@ -1,0 +1,135 @@
+---
+import IndicadorMainDashboard from "./IndicadorMainDashboard.astro";
+import data from "../../data/dashboards/datos_barra_cajas.json";
+import Grafico from "../Grafico";
+import plotAndTitle from "../../data/plots/sunburst_rubros_usos_mensual.json";
+import IcaBar from "./IcaBar.astro";
+const {
+    monthly: { x: monthlyX, m: monthlyM },
+    accumulated: { x: accumX, m: accumM },
+} = data.boxes;
+---
+
+<div class="flex">
+    <IcaBar className="w-1/8" />
+    <div class="grid grid-rows-3 lg:grid-cols-3 lg:grid-rows-1 w-full">
+        <div id="sunburst" class="flex justify-center items-center">
+            <div
+                class="relative overflow-hidden h-60 w-60 flex justify-center items-center"
+            >
+                <Grafico
+                    plotData={{
+                        data: [
+                            {
+                                values: [accumX.amount, accumM.amount],
+                                labels: ["Exportaciones", "Impoortaciones"],
+                                name: "Intercambio comercial argentino",
+                                textinfo: "none",
+                                hoverinfo: "label+value+percent",
+                                hole: 0.6,
+                                type: "pie",
+                                rotation: -90,
+                                marker: { colors: ["#fbbf24", "#a78bfa"] },
+                            },
+                        ],
+                        layout: {
+                            showlegend: false,
+                            margin: { t: 0, b: 0, l: 0, r: 0 },
+                            paper_bgcolor: "transparent",
+                        },
+                    }}
+                    divClassName={"h-full w-full"}
+                    client:only
+                />
+                <div
+                    class="absolute bg-white rounded-full left-1/6 top-1/6 -z-10 w-2/3 h-2/3 flex justify-center items-center flex-col"
+                >
+                    <p>Saldo comercial</p>
+                    <p>1234</p>
+                    <p>millones de dólares</p>
+                </div>
+            </div>
+        </div>
+        <div id="count" class="flex">
+            <div
+                id="sum"
+                class="w-1/8 h-3/5 my-auto grid grid-rows-3 grid-cols-1 mr-2"
+            >
+                <div class="w-full h-full overflow-hidden">
+                    <div
+                        class="bg-black relative rounded-full w-[200%] h-[200%] left-1/4 top-0"
+                    >
+                        <div
+                            class="absolute bg-white left-1/6 top-1/6 w-2/3 h-2/3 rounded-full"
+                        >
+                        </div>
+                    </div>
+                </div>
+                <div class="text-3xl text-center align-middle pr-1/6">+</div>
+                <div class="w-full h-full overflow-hidden">
+                    <div
+                        class="bg-black relative rounded-full w-[200%] h-[200%] left-1/4 bottom-full"
+                    >
+                        <div
+                            class="absolute bg-white left-1/6 top-1/6 w-2/3 h-2/3 rounded-full"
+                        >
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="indicators" class="w-3/4">
+                <IndicadorMainDashboard
+                    className="bg-expo w-full mb-10"
+                    data={accumX}
+                    precision={0}
+                >
+                    Exportaciones
+                </IndicadorMainDashboard>
+                <IndicadorMainDashboard
+                    className="bg-impo w-full"
+                    data={accumM}
+                    precision={0}
+                >
+                    Importaciones
+                </IndicadorMainDashboard>
+            </div>
+            <div
+                id="substract"
+                class="w-1/8 h-3/5 my-auto grid grid-rows-3 grid-cols-1 ml-2"
+            >
+                <div class="w-full h-full overflow-hidden">
+                    <div
+                        class="bg-black relative rounded-full w-[200%] h-[200%] right-[125%] top-0"
+                    >
+                        <div
+                            class="absolute bg-white left-1/6 top-1/6 w-2/3 h-2/3 rounded-full"
+                        >
+                        </div>
+                    </div>
+                </div>
+                <div class="text-3xl text-center align-middle pl-1/6">-</div>
+                <div class="w-full h-full overflow-hidden">
+                    <div
+                        class="bg-black relative rounded-full w-[200%] h-[200%] right-[125%] bottom-full"
+                    >
+                        <div
+                            class="absolute bg-white left-1/6 top-1/6 w-2/3 h-2/3 rounded-full"
+                        >
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="balance" class="flex justify-center items-center">
+            <div class="bg-balance rounded-full h-60 w-60 relative">
+                <div
+                    class="absolute bg-white rounded-full left-1/6 top-1/6 z-10 w-2/3 h-2/3 flex justify-center items-center flex-col"
+                >
+                    <p>Saldo comercial</p>
+                    <p>1234</p>
+                    <p>millones de dólares</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

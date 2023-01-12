@@ -3,6 +3,8 @@ import Grafico from "../Grafico";
 import plotAndTitle from "../../data/plots/sunburst_rubros_usos_mensual.json";
 import IndicadorMainDashboard from "./IndicadorMainDashboard.astro";
 import data from "../../data/dashboards/datos_barra_cajas.json";
+import Count from "./Count.astro";
+import IcaBar from "./IcaBar.astro";
 
 const {
     monthly: { x: monthlyX, m: monthlyM },
@@ -12,6 +14,7 @@ const {
 const { monthly: barMonthly, accumulated: barAccum } = data.bar;
 ---
 
+<Count />
 <div
     class="w-full md:h-screen py-8 -my-6 overflow-hidden grid grid-rows-7 grid-cols-1 md:grid-rows-5 min-h-[575px]"
 >
@@ -23,35 +26,7 @@ const { monthly: barMonthly, accumulated: barAccum } = data.bar;
             divClassName={"w-full h-3/4 mx-auto"}
             client:only
         />
-
-        <div class="w-full flex">
-            <div class:list={`w-expo h-min text-center`}>
-                <p class="md:text-lg">Exportaciones</p>
-            </div>
-            <div class:list={`w-impo h-min text-center`}>
-                <p class="md:text-lg">Importaciones</p>
-            </div>
-        </div>
-        <div class="w-full flex">
-            <div class:list={`w-expo bg-expo h-min text-center`}>
-                <p class="texg-lg font-semibold md:text-lg">
-                    {
-                        Number(
-                            (barMonthly.xPercentage * 100).toFixed(1)
-                        ).toLocaleString("es-AR")
-                    }%
-                </p>
-            </div>
-            <div class:list={`w-impo bg-impo h-min text-center`}>
-                <p class="texg-lg font-semibold md:text-lg">
-                    {
-                        Number(
-                            (barMonthly.mPercentage * 100).toFixed(1)
-                        ).toLocaleString("es-AR")
-                    }%
-                </p>
-            </div>
-        </div>
+        <IcaBar />
     </div>
     <div
         class="w-full row-span-3 flex flex-col justify-around items-center md:flex-row md:items-stretch md:row-span-1"

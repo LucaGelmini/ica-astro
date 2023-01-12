@@ -11,7 +11,9 @@ module.exports = {
 				balance: colors.blue[400],
 			},
 			spacing: {
-				...customSpacing()
+				...customSpacing(),
+				'1/6': `${100 / 6}%`,
+				'1/8': `${100 / 8}%`
 			}
 
 		},
